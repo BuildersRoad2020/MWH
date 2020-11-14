@@ -1,22 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-//Route::get('/', function () {
- //   return view('welcome');
-//});
-//Route::get('/', 'AdminController@index')->name('admin')->middleware('admin');
+use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminCreateUsersController;
+use App\Http\Controllers\ShowContractorsController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\DocumentsForReviewController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\WorkAreaController;
+use App\Http\Controllers\TechnicianController;
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\Technician;
+use App\Http\Middleware\Vendor;
 
 
 Route::middleware(['admin'])->group( function() {
