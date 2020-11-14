@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contractor;
 use App\User;
-use App\Skillset;
+use App\SkillSet;
 use App\Country;
 use App\State;
 use App\City;
@@ -31,7 +31,7 @@ class ShowContractorsController extends Controller
 
 	public function show (Contractor $showdetailedcontractor) {  // - Route Model binding "show(Model $variable that is declared in route)""
 	
-  $showskillset = Skillset::where([
+  $showskillset = SkillSet::where([
     'contractor_id' => $showdetailedcontractor->user_id,
   ])
     ->first();
@@ -168,7 +168,7 @@ class ShowContractorsController extends Controller
             'PLI_Exp' => '2000-01-01',
         ]);
 
-    Skillset::create([                            //creates entry for Skill_sets table
+    SkillSet::create([                            //creates entry for Skill_sets table
           'contractor_id' => $request['user_id'],
     ]);
 
