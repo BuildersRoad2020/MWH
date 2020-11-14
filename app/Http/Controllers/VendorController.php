@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Contractor;
 use App\User;
 use App\Technician;
-use App\Skillset;
+use App\SkillSet;
 use App\Country;
 use App\State;
 use App\City;
@@ -308,7 +308,7 @@ class VendorController extends Controller
  
  public function updateskillset(Request $request) {
 
-    Skillset::where([
+    SkillSet::where([
             'contractor_id' => auth()->user()->id,
         ])
             ->update([
