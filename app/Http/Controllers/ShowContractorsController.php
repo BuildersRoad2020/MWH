@@ -84,22 +84,31 @@ class ShowContractorsController extends Controller
       'status' => 'required',
       ]);
 
+    $checkFDC = Document::where(['contractor_id'=> $showdetailedcontractor->user_id])
+      ->where('FormID',[1])   //Financial Detail Confirmation     
+      ->count();
+
     $checkPLI = Document::where(['contractor_id'=> $showdetailedcontractor->user_id])
-      ->where('FormID', '=', '1')
-      ->orwhere('FormID', '=', '2')      
-      ->orwhere('FormID', '=', '4')       
-      ->orwhere('FormID', '=', '5')            
-      ->count();
+      ->where('FormID',[2])   // Public Liability Insurance     
+      ->count();      
 
-    $checkpending = Document::where(['contractor_id'=> $showdetailedcontractor->user_id])
-      ->where('Status', '<>', '2')
-      ->Orwhere('Status', '<>', '4')
-      ->count();
+    $checkSWMS = Document::where(['contractor_id'=> $showdetailedcontractor->user_id])
+      ->where('FormID',[4]) // SWMS Building Property and Site Maintenance        
+      ->count();     
 
-    if($checkPLI <> 0)
+    $checkSWMS2 = Document::where(['contractor_id'=> $showdetailedcontractor->user_id])
+      ->where('FormID',[5])  // SWMS Communication Equipment      
+      ->count();      
+
+    if($checkFDC == 0 || $checkPLI == 0 || $checkSWMS == 0 || $checkSWMS2 == 0)
        {
       return back()->withInput()->with('status','Incomplete Documents!');   
     }
+
+    $checkpending = Document::where(['contractor_id'=> $showdetailedcontractor->user_id])
+      ->whereIn('Status',[1,3,5])
+      ->count();
+
 
     if($checkpending > 0)
              {
@@ -156,6 +165,8 @@ class ShowContractorsController extends Controller
 
   public function store(Request $request){                
 
+
+
     $request->validate([
             'contractor_name' => ['required', 'string', 'max:255'],
             'user_id' => 'required',
@@ -165,7 +176,7 @@ class ShowContractorsController extends Controller
     Contractor::create([
             'contractor_name' => $request['contractor_name'],
             'user_id' => $request['user_id'],
-            'PLI_Exp' => '2000-01-01',
+            'email_primary' => User::find($request['user_id'])->email,
         ]);
 
     SkillSet::create([                            //creates entry for Skill_sets table

@@ -28,7 +28,7 @@ Route::middleware(['admin'])->group( function() {
 
 	Route::get('/showcontractors', 'ShowContractorsController@index')->name('admin.showcontractors');	// admin default index that shows contractors list
 	Route::get('/addcontractors', 'ShowContractorsController@create')->name('admin.addcontractors'); //To create user button
-	Route::post('/addcontractors', 'ShowContractorsController@store')->name('admin.storecontractors'); //To store contractors in DB | admin default index page
+	Route::post('/addcontractors/', 'ShowContractorsController@store')->name('admin.storecontractors'); //To store contractors in DB | admin default index page
 
 	Route::get('FormsandDocuments', 'DocumentController@formsanddocuments')->name('admin.forms');
 	Route::put('FormsandDocuments/Update', 'DocumentController@updatedocument')->name('admin.updatedocument');

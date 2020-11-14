@@ -105,7 +105,7 @@
                             <div class="form-group">
                             <label>{{ __('Country') }} </label>
                             <select name="country" id="country" class="form-control @error('country') is-invalid @enderror">             
-                                    <option value="" disabled selected>-- Select Country</option> 
+                                    <option value="" disabled selected>Select Country</option> 
                                        @foreach($countries as $key =>$country)  @if($key > 0) 
                                     <option value="{{ $country->id }}" > {{ $country->country}} </option>  @endif
                                         @endforeach         
@@ -420,7 +420,7 @@
 
                     $.each(data, function(key, value){
 
-                        $('select[name="city"]').append('<option value="'+ key +'">' + value + '</option>');
+                        $('select[name="city"]').append('<option value="'+ value +'">' + value + '</option>');
 
                     });
                 },
