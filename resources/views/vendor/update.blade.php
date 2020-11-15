@@ -366,9 +366,9 @@
  <script type="text/javascript">
     $('#loadercountry').hide();
     $('#loaderstate').hide();
-    $('div[id="state"]').hide();
-    $('div[id="city"]').hide();
-     $(document).ready(function() {
+  //  $('div[id="state"]').hide();
+ //   $('div[id="city"]').hide();
+    $(document).ready(function() {
     $('select[name="country"]').on('change', function(){
         var countryId = $(this).val();
         if(countryId) {
@@ -419,8 +419,8 @@
                     $('div[id="city"]').fadeIn();
 
                     $.each(data, function(key, value){
-
-                        $('select[name="city"]').append('<option value="'+ value +'">' + value + '</option>');
+                   
+                        $('select[name="city"]').append('<option value="'+ key +'">' + value + '</option>');
 
                     });
                 },

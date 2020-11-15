@@ -113,6 +113,7 @@ class VendorController extends Controller
       $cityname = City::where(['id' => $contractorcity,])
         -> first();
 
+
        return view ('vendor.update', [
         'contractors' => $contractors,
         'countries' => $countries,
@@ -129,14 +130,15 @@ class VendorController extends Controller
    
  public function getStates($id)
     {
-        $states = DB::table("states")->where("country_id",$id)->pluck("name","id");
+        $states = State::where('country_id',$id)->orderBy('name', 'ASC')->pluck('name','id');
+
 
         return json_encode($states);
     }
 
   public function getCities($id)
     {
-        $cities = DB::table("cities")->where("state_id",$id)->pluck("name","id");
+        $cities = City::where('state_id',$id)->orderBy('name', 'ASC')->pluck('name','id');
 
         return json_encode($cities);
     }

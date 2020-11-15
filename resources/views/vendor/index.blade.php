@@ -45,7 +45,7 @@
                         <td> {{ $contractors->address}}  </td>
                         <tr></tr>
                         <th>City </th>
-                        <td> {{ $cityname->name}}   </td> 
+                        <td> {{ $cityname->name }}   </td> 
                         <tr></tr>
                         <th>POST CODE </th>
                         <td> {{ $contractors->postcode}}  </td>
