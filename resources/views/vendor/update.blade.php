@@ -366,8 +366,8 @@
  <script type="text/javascript">
     $('#loadercountry').hide();
     $('#loaderstate').hide();
-  //  $('div[id="state"]').hide();
- //   $('div[id="city"]').hide();
+    $('div[id="state"]').hide();
+    $('div[id="city"]').hide();
     $(document).ready(function() {
     $('select[name="country"]').on('change', function(){
         var countryId = $(this).val();
@@ -405,7 +405,7 @@
 
      $(document).ready(function() {
     
-    $('select[name="state"]').on('change', function(){
+    $('select[name="state"]').on('click', function(){
         var stateId = $(this).val();
         if(stateId) {
             $.ajax({
