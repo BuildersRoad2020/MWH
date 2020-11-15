@@ -53,9 +53,11 @@ class AdminCreateUsersController extends Controller
             'role' => 'required',
     ]);
 
+    $UCwordsname = ucwords($request['name']);
+
     $createuser = User::create([
             $pass =  STR::random(8),
-            'name' => $request['name'],
+            'name' => $UCwordsname,
             'email' => $request['email'],
             'password' => Hash::make($pass),
             'role' => $request['role'],
@@ -64,7 +66,7 @@ class AdminCreateUsersController extends Controller
         $email = $request['email'];
         $details = [
            
-            'name'=> 'Dear '.$request['name'].'',
+            'name'=> 'Dear '.$UCwordsname.'',
             'body' =>  'Your access to Builders group has been created!',
             'user' => 'Your username is : '.$email,
             'password' => 'Your password is : '.$pass,

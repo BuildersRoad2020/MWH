@@ -172,9 +172,10 @@ class ShowContractorsController extends Controller
             'user_id' => 'required',
     ]);
 
+    $UCwordsname = ucwords($request['contractor_name']);
  
     Contractor::create([
-            'contractor_name' => $request['contractor_name'],
+            'contractor_name' => $UCwordsname,
             'user_id' => $request['user_id'],
             'email_primary' => User::find($request['user_id'])->email,
         ]);
