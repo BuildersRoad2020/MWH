@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use App\Document;
 use App\Contractor;
+use App\Forms;
 use \App\Mail\DocumentExpiry;
 
 
@@ -15,14 +16,14 @@ class NotifEmail extends Command
      *
      * @var string
      */
-    protected $signature = 'commands:sendnotification'; //About to expire Contractor Document Notification
+    protected $signature = 'commands:sendnotification30days'; //About to expire Contractor Document Notification
 
     /**
      * The console command description.
      * 
      * @var string
      */
-    protected $description = 'Send Daily Emails';
+    protected $description = 'Send Expiration Notification before 30 days';
 
     /**
      * Create a new command instance.
@@ -42,27 +43,29 @@ class NotifEmail extends Command
     public function handle()
     {
         $today = Carbon::now();// current date
-
-        $users = Document::whereDate('Expiration', '>', $today)->get(); // get all data 
+        $users = Document::whereDate('Expiration', '>', $today)->get(); // get all data       
         foreach ($users as $user) {
             $contractors = Contractor::where('user_id', $user->contractor_id)->first();
             $Expiration = $user->Expiration;  
-            $Document = $user->Type;                  
+            $Document = $user->FormID;                  
             $name = $contractors->contractor_name;
             $current =date("Y-m-d");
+            $Form = Forms::where('id',$Document)->first();
+            $doc=$Form->Doc_Desc;
+
             $date=date_create($Expiration);
             date_sub($date,date_interval_create_from_date_string("30 days"));
-            $date323 = date_format($date,"Y-m-d");
-        if($current == $date323)
-        {
+            $datetocompare = date_format($date,"Y-m-d");        
+
+        if($current == $datetocompare)
+        {           
             $email =  $contractors->email_primary;
             $contractor_id = $contractors->user_id;
-            Document::where(['contractor_id' => $contractor_id,])
-            -> update(['Status' => 4]);
+            Document::where('FormID', $user->FormID)->where(['contractor_id' => $contractor_id,])->update(['Status' => 4]);
 
         $details2 = [   
             'name'=> 'Dear '.$name,
-            'body' =>  'Your '.$Document.' will expire this '.$Expiration,
+            'body' =>  'Your '.$doc.' will expire this '.$Expiration,
             'body2' => 'Please Renew Before Document Expires' ,
         ];
         \Mail::to($email)->send(new documentexpiry($details2));

@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Document;
 use App\Contractor;
 use App\User;
+use App\Forms;
 use \App\Mail\DocumentExpiry;
 
 
@@ -43,31 +44,29 @@ class ExpiredNotifEmail extends Command
     public function handle()
     {
         $today = Carbon::now();// current date
-
         $users = Document::whereDate('Expiration', '<', $today)->get(); // get all data 
         foreach ($users as $user) {
             $contractors = Contractor::where('user_id', $user->contractor_id)->first();
-            $Expiration = $user->Expiration; 
-            $Document = $user->Type;     
+            $Expiration = $user->Expiration;  
+            $Document = $user->FormID;                  
             $name = $contractors->contractor_name;
-            $current =date("Y-m-d");
-            $date=date_create($Expiration);
-            date_sub($date,date_interval_create_from_date_string("7 days"));
-            $date323 = date_format($date,"Y-m-d");
-        if($current > $date323)
+            $Form = Forms::where('id',$Document)->first();
+            $doc=$Form->Doc_Desc;
+
+            $datetocompare = Carbon::parse($Expiration)->addDays(1);              
+
+        if($today = $datetocompare)
         {
+             
             $email =  $contractors->email_primary;
             $contractor_id = $contractors->user_id;
-            Document::where(['contractor_id' => $contractor_id,])
-            -> update(['Status' => 5]);
-            Contractor::where(['user_id' => $contractor_id,])
-            -> update(['Status' => 0]);
+            Document::where('FormID', $user->FormID)->where(['contractor_id' => $contractor_id,])->update(['Status' => 5]);
+            Contractor::where(['user_id' => $contractor_id])->update(['Status' => 0]);
 
         $details2 = [   
             'name'=> 'Dear '.$name,
-            'body' =>  'Your ' .$Document. ' has expired on '.$Expiration,
-            'body2' => 'Please Upload Another Document' ,
-  
+            'body' =>  'Your '.$doc.' document has already expired last '.$Expiration,
+            'body2' => 'Please Renew this document.' ,
         ];
         \Mail::to($email)->send(new documentexpiry($details2));
         }
