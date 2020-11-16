@@ -69,8 +69,12 @@
 
                                 <div id="optional">
                                 <label>{{ __('Expiration') }}</label>
+
+
+
                                 <input id="Expiration" type="Date" class="form-control @error('Expiration') is-invalid @enderror "  name="Expiration"  >
                                     <small class="text-info"><small> If Applicable</small> </small>
+
                                     @error('Expiration')
                                     <small class="text-danger">
                                         {{ $message }}

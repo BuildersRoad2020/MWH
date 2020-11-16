@@ -52,7 +52,7 @@
     
                                 <label>{{ __('Select File') }}</label>
                                 <input id="FileName" type="File" class="form-control @error('FileName') is-invalid @enderror "  name="FileName"  >
-                                    <small class="text-danger"><small> Document should be in PDF Format | Max size 2 MB</small> </small>
+                                    <small class="text-info"><small> Document should be in PDF Format | Max size 2 MB</small> </small>
                                     @error('FileName')
                                     <small class="text-danger">
                                         {{ $message }}
@@ -68,7 +68,7 @@
                                 <div id="optional">
                                 <label>{{ __('Expiration') }}</label>
                                 <input id="Expiration" type="Date" class="form-control @error('Expiration') is-invalid @enderror "  name="Expiration">
-                                    <small class="text-danger"><small> If Applicable</small> </small>
+                                    <small class="text-info"><small> If Applicable</small> </small>
                                     @error('Expiration')
                                     <small class="text-danger">
                                         {{ $message }}
@@ -83,7 +83,7 @@
 
                                 <label>{{ __('Coverage') }}</label>
                                 <input type="number" class="form-control" name="Coverage" placeholder="Succeeding Hour" maxlength="10"     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >
-                                    <small class="text-danger"><small> If Applicable</small> </small>
+                                    <small class="text-info"><small> If Applicable</small> </small>
                                     @error('Coverage')
                                     <small class="text-danger">
                                         {{ $message }}

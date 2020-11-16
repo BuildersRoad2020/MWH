@@ -100,11 +100,13 @@ class DocumentController extends Controller
             'FileName' => ['required','mimes:pdf', 'max:2000'],
             'Coverage' => ['sometimes'],
             'FormID' => 'required',
+            'Expiration' => 'nullable|after:tomorrow',
            ],
            [
             'FileName.mimes' => 'Document should be: PDF.',
             'FileName.max' => 'Maximum file size allowed is 2 MB',
-            'FormID.required' => 'Please select document description' ,
+            'FormID.required' => 'Please select document description',
+            'Expiration.after' => 'Invalid Expiration Date',
         ]);
     
      
@@ -138,11 +140,13 @@ class DocumentController extends Controller
             'FileName' => ['required','mimes:pdf', 'max:2000'],
             'Coverage' => ['sometimes'],
             'FormID' => 'required',
+            'Expiration' => 'nullable|after:tomorrow',            
            ],
            [
             'FileName.mimes' => 'Document should be: PDF.',
             'FileName.max' => 'Maximum file size allowed is 2 MB',
             'FormID.required' => 'Please select document description' ,
+            'Expiration.after' => 'Invalid Expiration Date',
         ]);
     
      
