@@ -24,7 +24,8 @@
                                         <tr>
                                             <th  class="text-info"> Technician Name</th>
                                             <th  class="text-info"> Email </th>
-                                            <th  class="text-info"> Mobile Number </th>
+                                            <th  class="text-info"> Mobile Number </a> </th>
+                                            <th  class="text-info"> View Documents </th>                                            
                                         </tr>
                                     </thead>
                             <tbody>                        
@@ -34,8 +35,13 @@
                                     </td>
                                             <td> {{ $showtechnician->email}}  
                                     </td>
-                                            <td> {{ $showtechnician->phone}}
+                                            <td> ({{ $showtechnician->countrycode}}) {{ $showtechnician->phone}}
                                     </td>
+
+                                            <td>
+                                                <a href="{{ route('vendor.techniciandocs', [$showtechnician->id])}}" > 
+                                        <i class="pe-7s-notebook"></i> MORE</a>    
+                                    </td>                                    
                               @endforeach
                                         </tr>
                             </tbody>

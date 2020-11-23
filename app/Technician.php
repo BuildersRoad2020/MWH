@@ -8,7 +8,7 @@ class Technician extends Model
 {
 
 	  protected $fillable = [
-                          'name', 'role', 'user_id', 'contractor_id','email','phone'
+                          'name', 'role', 'user_id', 'contractor_id' , 'email','phone', 'countrycode'
     ];
         public function contractors() {
         return $this->belongsTo(\App\Contractor::class);

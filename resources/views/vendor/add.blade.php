@@ -38,10 +38,22 @@
 
 
                      <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label>{{ __('Country Code') }}</label>
+                            <input id="phone" type="text" class="form-control @error('countrycode') is-invalid @enderror" name="countrycode"  placeholder="Country Code" maxlength="3">
+                                @error('countrycode')
+                                    <small class="text-danger">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
                             <div class="form-group">
                             <label>{{ __('Mobile Number') }}</label>
-                            <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone"  placeholder="Enter Phone Number">
+                            <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone"  placeholder="Enter Phone Number" maxlength="10">
                                 @error('phone')
                                     <small class="text-danger">
                                         {{ $message }}

@@ -1,95 +1,21 @@
-@extends('layouts.technician')
+@extends('layouts.vendor')
 
-@section('content')
-        <div class="content">
-            <div class="container-fluid">    
+@section('content')   
 
-            <form method="POST" action="{{ route('technician.update')}}"> <button type="submit" class="btn btn-info btn-fill pull-right"> Update </button>  <br> 
-             @csrf
-             @method('PUT')                                 
-    </div> <br> 
-                  
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="text-info">My Contractor Details   </h4>                      
-                            </div>
-
-        <div class="content">    
-          
-                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                            <label>{{ __('Contractor Name') }}</label>
-                            <input id="contractor_name" type="text" class="form-control @error('contractor_name') is-invalid @enderror" name="contractor_name" value="{{ old('contractor_name', $contractors->contractor_name  )}}" placeholder="Contractor Name" disabled>
-                                @error('contractor_name')
-                                    <small class="text-danger small">
-                                        {{ $message }}
-                                    </small>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                            <label>{{ __('Name') }}</label>
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $technicians->name  )}}" placeholder="name">
-                                @error('contractor_name')
-                                    <small class="text-danger small">
-                                        {{ $message }}
-                                    </small>
-                                @enderror
-                            </div>                            
-                        </div>
-                        <div class="col-md-1">
-                            <div class="form-group">
-                            <label>{{ __('Country Code') }}</label>
-                            <input id="countrycode" type="text" class="form-control @error('countrycode') is-invalid @enderror" name="countrycode" value="{{ old('countrycode', $technicians->countrycode  )}}" placeholder="countrycode">
-                                @error('contractor_name')
-                                    <small class="text-danger small">
-                                        {{ $message }}
-                                    </small>
-                                @enderror
-                            </div>                            
-                        </div>       
-                        <div class="col-md-2">
-                            <div class="form-group">
-                            <label>{{ __('Phone') }}</label>
-                            <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone', $technicians->phone  )}}" placeholder="phone">
-                                @error('Phone')
-                                    <small class="text-danger small">
-                                        {{ $message }}
-                                    </small>
-                                @enderror
-                            </div>                            
-                        </div>        
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                            <label>{{ __('Email') }}</label>
-                            <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $technicians->email  )}}" placeholder="email" disabled>
-                                @error('email')
-                                    <small class="text-danger small">
-                                        {{ $message }}
-                                    </small>
-                                @enderror
-                            </div>                            
-                        </div>                                                              
-               
-                       
-                
-                    </div>
-                </form>                    
-        </div>
-               </div> 
-        <div class="content">
-
-            <button type="button" class="btn btn-info btn-fill pull-right" data-toggle="modal" data-target="#Add">
-            <i class="pe-7s-plus"> </i> Upload Document
+<!-- Button trigger modal -->
+<div class="content">
+    <div class="container-fluid">
+        <button type="button" class="btn btn-info btn-fill pull-right" data-toggle="modal" data-target="#Add">
+            <i class="pe-7s-plus"> </i> New Document
         </button>
+    </div>
+</div>
+<br/>
+
+
 
 <!-- Add Document Modal -->
-<form method="POST" action="{{ route('technician.upload')}}" enctype="multipart/form-data" >
+<form method="POST" action="{{ route('vendor.individualuploads', [$id] ) }}" enctype="multipart/form-data" >
                                         @csrf
                                         @method('PUT') 
 <div class="modal fade" id="Add" tabindex="-1" role="dialog" aria-labelledby="AddTitle" aria-hidden="true" data-backdrop="false">
@@ -161,7 +87,7 @@
 
                                 <label>{{ __('Coverage') }}</label>
 
-                                <input type="number" class="form-control" name="Coverage" maxlength="10"     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >                                
+                                <input type="number" class="form-control" name="Coverage" maxlength="10"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >                                
                                     <small class="text-info"><small> If Applicable</small> </small>
                                     @error('Coverage')
                                     <small class="text-danger">
@@ -192,9 +118,21 @@
 
 <!--End Add Document Modal -->
 
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="text-info"> {{$id->name}}'s Documents </h4>                             
+                </div> 
 
-        <div class="col-md-12">  <br>
-            <div class="row">  <div class="card">
+
+                              
+
+                <div class="content" >  
+        <div class="col-md-12">
+            <div class="row">
                 <div class="content table-responsive table-full-width">
                     <table class="table table-hover table-striped">    
                             <thead>  
@@ -224,17 +162,53 @@
                     </table>
                      {{ $document->links() }}
                 </div>
+
+            </div>
+        </div>
+                </div>
             </div>
             </div>
         </div>
-        </div>        
+    </div>
+</div>
 
 
-                        </div>
-                    </div>
-                </div>
-           
-    
-  
+
 
 @endsection
+
+@section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$('p[id="form"]').hide();
+
+$(document).ready(function() {
+
+    $('select[id="FormID"]').change(function() { 
+            if($('select[id="FormID"] option:selected').val() == '1') {
+            $('p[id="form"]').fadeIn();  
+           $('div[id="optional"]').fadeOut();                      
+                 }
+            else {
+            $('p[id="form"]').fadeOut(); 
+            $('div[id="optional"]').fadeIn();                
+            }
+
+         }).change();
+
+    $('select[id="FormID"]').change(function() { 
+            if($('select[id="FormID"] option:selected').val() == '4') { 
+           $('div[id="optional"]').fadeOut();                      
+                 }
+         }).change();
+
+    $('select[id="FormID"]').change(function() { 
+            if($('select[id="FormID"] option:selected').val() == '5') { 
+           $('div[id="optional"]').fadeOut();                      
+                 }
+         }).change();    
+
+         });
+</script>
+@endsection
+

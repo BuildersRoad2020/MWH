@@ -58,8 +58,11 @@ Route::middleware(['vendor'])->group(function () {
 		//Route::get('get-city-list', 'CountryController@getCityList');
 
     Route::get('/MyTechnicians', 'VendorController@showtechnicians')->name('vendor.showtechnicians');  //Shows technicians page
-    Route::get('/MyTechnicians/Add', 'VendorController@createtechnicians')->name('vendor.addtechnicians'); //To add technicians button
-    Route::post('/MyTechnicians/Add', 'VendorController@storetechnicians')->name('vendor.storetechnicians'); //To store technicians in users table, and technician table
+    Route::get('/MyTechnicians/{id}', 'DocumentController@techniciandocs')->name('vendor.techniciandocs');  //Shows technicians page
+    Route::put('/MyTechnicians/{id}', 'DocumentController@individualuploads')->name('vendor.individualuploads'); 
+
+    Route::get('/Add/MyTechnicians', 'VendorController@addtechnicians')->name('vendor.addtechnicians'); //To add technicians button
+    Route::post('/Add/MyTechnicians', 'VendorController@storetechnicians')->name('vendor.storetechnicians'); //To store technicians in users table, and technician table
 
     Route::get('/MySkillSet', 'VendorController@viewskillset')->name('vendor.viewskillset'); //button to view skillset details
     Route::put('/MySkillSet', 'VendorController@updateskillset')->name('vendor.updateskillset'); //function to update skillset
@@ -80,6 +83,8 @@ Route::middleware(['vendor'])->group(function () {
 
 Route::middleware(['technician'])->group(function () {
 	Route::get('/technician', 'TechnicianController@index')->name('technician.index');
+	Route::put('/technician', 'TechnicianController@update')->name('technician.update');	
+	Route::put('/technician/upload', 'TechnicianController@upload')->name('technician.upload');		
 	Route::post('/technician/changepassword', 'ResetPasswordController@resetPasswordtechnician')->name('changePasswordtechnician');
 });
 //Route::get('/home', 'HomeController@index')->name('home');

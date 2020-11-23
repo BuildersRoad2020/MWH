@@ -238,7 +238,7 @@ class VendorController extends Controller
 
     //This will be under Technicians Link
 
-  public function showtechnicians (Technician $showtechnicians) {  // - Route Model binding "show(Model $variable that is declared in route)""
+  public function showtechnicians() {  // - Route Model binding "show(Model $variable that is declared in route)""
   
       $showtechnicians = Technician::where('contractor_id', auth()->user()->id)
            ->orderBy('name')
@@ -254,26 +254,27 @@ class VendorController extends Controller
     }
 
 
-  public function createtechnicians(){       
-            return view('vendor.add');
+  public function addtechnicians() {       
+          
+      return view ('vendor.add');
     }
 
   public function storetechnicians(Request $request){    //create user and then create technician
 
     $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required','regex:/[+][0-9]/'], 
+            'phone' => ['required','regex:/^[0-9]+$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'countrycode' => 'numeric',
         ]);
 
     $newtechnician = User::create([
              $pass =  STR::random(8),
-             $removespace = $request['phone'], //to remove spaces between phone numbers
-             $removedspace = str_replace(' ', '', $removespace),
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($pass),
             'role' => '3',
+
         ]);
 
     Technician::create([
@@ -281,7 +282,9 @@ class VendorController extends Controller
            'user_id' => $newtechnician->id,
            'name' => $request['name'],
            'email' => $request['email'],
-           'phone' => $removedspace,
+           'phone' => str_replace(' ','', $request['phone']),  
+           'countrycode' => str_replace(' ','', $request['countrycode']),           
+           'contractor_id' => auth()->user()->id,            
         ]);
   
     $email = $request['email'];

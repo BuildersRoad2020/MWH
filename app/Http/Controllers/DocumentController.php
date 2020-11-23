@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contractor;
-use App\Document;
-use App\Country;
+use App\Document; use App\Technician;
+use App\Country; use App\IndividualDocs;
 use App\User;
 use App\Forms;
 use Illuminate\Support\Facades\DB;
@@ -55,6 +55,54 @@ class DocumentController extends Controller
       ]);
 
     }
+
+    public function techniciandocs(Technician $id) {
+
+      $Doc_Descs = DB::table('forms')
+        ->where('Type', '=','Individual')->get();
+
+      $document =  DB::table('individual_docs')->join('forms','forms.id', '=', 'individual_docs.FormID')->join('countries','countries.id', '=', 'forms.Country')
+        ->where('individual_docs.technician_id', '=', $id->id) 
+        ->where('individual_docs.contractor_id', auth()->user()->id)
+        ->Orderby('forms.Doc_Desc', 'ASC')->select('forms.Doc_Desc','individual_docs.FileName','individual_docs.Expiration','countries.Country','individual_docs.Coverage','individual_docs.Status')->paginate(15);
+ 
+       return view ('vendor.individualdocs',['Doc_Descs' => $Doc_Descs, 'document' => $document, 'id' => $id]);
+    }
+
+    public function individualuploads(Request $request,Technician $id){
+
+      if($request ->hasFile('FileName'))  {
+      $request->validate([
+            'FileName' => ['required','mimes:pdf', 'max:2000'],
+            'Coverage' => ['sometimes'],
+            'FormID' => 'required',
+            'Expiration' => 'nullable|after:tomorrow',
+           ],
+           [
+            'FileName.mimes' => 'Document should be: PDF.',
+            'FileName.max' => 'Maximum file size allowed is 2 MB',
+            'FormID.required' => 'Please select document description',
+            'Expiration.after' => 'Invalid Expiration Date',
+        ]);
+    
+    $FormID = $request['FormID'];   //adds type of file to filename    
+    $Type = Forms::where('ID', $FormID)->get('Doc_Desc')->pluck('Doc_Desc'); //adds type of file to filename    
+    $File = $request->file('FileName'); //file request
+    $FileName = auth()->user()->name . ' '.  $Type->join(' ') . ' '. time() . '.' . $File->getClientOriginalExtension(); //rename file
+    $FilePath = public_path() . '/storage/app/documents'; 
+    $request->file('FileName')->move($FilePath, $FileName); //save actual file to storage
+
+    $upload = IndividualDocs::updateOrCreate(
+        ['contractor_id' => auth()->user()->id, 'FormID'=> $FormID, 'user_id' => $id->id ],
+        ['FileName' => $FileName, 'Expiration' => $request['Expiration'], 'Coverage' => $request['Coverage'], 'Status'=> '1']
+      );
+  
+      return back()->withInput()->with('vendor.techniciandocs')->with('status','Document uploaded successfully!');
+    }
+       
+    return back();
+    }
+
 
     public function index2() {       //vendor document dashboard2
 
