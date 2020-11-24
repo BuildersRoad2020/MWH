@@ -26,7 +26,6 @@ use Intervention\Image\Facades\Image;
 
 
 
-
 class VendorController extends Controller
 {
   public function index(Request $request) {
@@ -159,7 +158,7 @@ class VendorController extends Controller
           'country' => 'required',
           'abn' => 'required',
           'Name_primarycontact' => 'required',
-          'phone_primary' => 'required|numeric',
+          'phone_primary' => ['required','regex:/^[0-9]+$/'],
           'terms' => 'required',
           'currency' => 'required',
           'branch' => 'required',
@@ -167,7 +166,7 @@ class VendorController extends Controller
           'bsb' => 'required',
           'accountnumber' => 'required|numeric',
           'accountname' => 'required',
-          'phone_secondary' => 'nullable|numeric',
+          'phone_secondary' => ['required','regex:/^[0-9]+$/'],
           'email_secondary' => 'nullable|email',
         ], [
           'contractor_name.required' => 'Please enter your Contractor Name',
