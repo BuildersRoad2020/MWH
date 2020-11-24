@@ -75,14 +75,14 @@
                         <div class="col-md-2">
                             <div class="form-group">   
                             <label>{{ __('City') }}</label>
-                            <input id="city" type="text" class="form-control" name="city" value="{{ old('city', $cityname->Name  )}}" placeholder="{{ $cityname->name}}" disabled>
+                            <input id="city" type="text" class="form-control" name="city" value="{{ old('city', $cityname->name  )}}" disabled>
                             </div> 
                         </div>          
 
                         <div class="col-md-2">
                             <div class="form-group">   
                             <label>{{ __('State') }}</label>
-                            <input id="state" type="text" class="form-control" name="state" value="{{ old('state', $statename->id  )}}" placeholder="{{ $statename->name}}" disabled>
+                            <input id="state" type="text" class="form-control" name="state" value="{{ old('state', $statename->name  )}}" disabled>
                             </div> 
                         </div>  
 

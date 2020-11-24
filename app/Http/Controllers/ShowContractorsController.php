@@ -37,16 +37,15 @@ class ShowContractorsController extends Controller
     ->first();
 
   $contractorcountry = Contractor::pluck('country'); //to echo country name from countries table(update function uses country_id)
-  $countryname = Country::find($contractorcountry)
-         -> first();
+  $countryname = Country::where('id',$contractorcountry)->select('country')->first();
+
 
   $contractorstate = Contractor::pluck('state'); //to echo state name from countries table(update function uses country_id)
-  $statename = State::find($contractorstate)
-         -> first();
+  $statename = State::where('id', $contractorstate)->select('name')->first();
+
 
   $contractorcity = Contractor::pluck('city'); //to echo state name from countries table(update function uses country_id)
-  $cityname = City::find($contractorcity)
-         -> first();
+  $cityname = City::where('id',$contractorcity)->select('name')->first();
 
  
     $review = DB::table('documents')
