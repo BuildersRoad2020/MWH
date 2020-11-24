@@ -46,16 +46,15 @@ class VendorController extends Controller
           ->first();
      
         $contractorcountry = Contractor::pluck('country'); //to echo country name from countries table
-        $countryname = Country::where(['id' => $contractorcountry,])
-          ->first();
+        $countryname = DB::table('contractors')->join('countries','countries.id','contractors.country')
+        ->where('contractors.user_id',auth()->user()->id)->pluck('countries.country')->first();
         
+
         $contractorstate = Contractor::pluck('state'); //to echo state name from countries table(update function uses country_id)
-        $statename = State::where(['id' => $contractorstate,])
-         -> first();
+        $statename = DB::table('contractors')->join('states','states.id','contractors.state')->where('contractors.user_id',auth()->user()->id)->pluck('states.name')->first();
 
         $contractorcity = Contractor::pluck('city'); //to echo state name from countries table(update function uses state_id)
-        $cityname = City::where(['id' => $contractorcity,])
-         -> first();
+        $cityname = DB::table('contractors')->join('cities','cities.id','contractors.city')->where('contractors.user_id',auth()->user()->id)->pluck('cities.name')->first();
 
         $financial = Document::where('contractor_id', auth()->user()->id)
           ->where('FormID','4')
@@ -72,7 +71,7 @@ class VendorController extends Controller
         ->get();
 
        
-
+        json_encode($countryname);
 
         return view ('vendor.index', [
           'contractors' => $contractors ,

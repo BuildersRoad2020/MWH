@@ -106,7 +106,7 @@
                             <label>{{ __('Country') }} </label>
                             <select name="country" id="country" class="form-control @error('country') is-invalid @enderror">             
                                        @foreach($countries as $key =>$country)  @if($key > 0) 
-                                    <option value="{{ $country->id }}" > {{ $country->id}} </option>  @endif
+                                    <option value="{{ $country->id }}" > {{ $country->country}} </option>  @endif
                                         @endforeach         
                             </select> 
                             <span id="loadercountry"><i class="fa fa-spinner fa-3x fa-spin"></i></span>
@@ -123,7 +123,7 @@
                             <label>{{ __('State') }}  </label>
                             <select name="state" id="state" class="form-control @error('state') is-invalid @enderror">  
                                         @foreach($states as $state)
-                                    <option value="{{ $state->id }}">{{ $state->id }}</option>
+                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
                                         @endforeach 
                             </select> 
                             <span id="loaderstate"><i class="fa fa-spinner fa-3x fa-spin"></i></span>
@@ -140,7 +140,7 @@
                             <label>{{ __('City') }}  </label>
                             <select name="city" id="city" class="form-control @error('city') is-invalid @enderror">
                                     @foreach($cities as $city)
-                                    <option value="{{ $city->id }}">{{ $city->id }}</option>
+                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
                                     @endforeach 
                                     </select> 
                                 @error('city')
@@ -382,7 +382,7 @@
 
                     $.each(data, function(key, value){
 
-                        $('select[name="state"]').append('<option value="'+ key +'">' + key + '</option>');
+                        $('select[name="state"]').append('<option value="'+ key +'">' + value + '</option>');
 
                     });
                 },
@@ -417,7 +417,7 @@
 
                     $.each(data, function(key, value){
                    
-                        $('select[name="city"]').append('<option value="'+ key +'">' + key + '</option>');
+                        $('select[name="city"]').append('<option value="'+ key +'">' + value + '</option>');
 
                     });
                 },

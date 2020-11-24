@@ -36,16 +36,18 @@ class ShowContractorsController extends Controller
   ])
     ->first();
 
-  $contractorcountry = Contractor::pluck('country'); //to echo country name from countries table(update function uses country_id)
-  $countryname = Country::where('id',$contractorcountry)->select('country')->first();
-
+  $contractorcountry = Contractor::pluck('country'); //to echo country name from countries table
+  $countryname = DB::table('contractors')->join('countries','countries.id','contractors.country')
+        ->where('contractors.user_id',$showdetailedcontractor->user_id)->pluck('countries.country')->first();
+  
 
   $contractorstate = Contractor::pluck('state'); //to echo state name from countries table(update function uses country_id)
-  $statename = State::where('id', $contractorstate)->select('name')->first();
+  $statename = DB::table('contractors')->join('states','states.id','contractors.state')->where('contractors.user_id',$showdetailedcontractor->user_id)->pluck('states.name')
+        ->first();
 
-
-  $contractorcity = Contractor::pluck('city'); //to echo state name from countries table(update function uses country_id)
-  $cityname = City::where('id',$contractorcity)->select('name')->first();
+  $contractorcity = Contractor::pluck('city'); //to echo state name from countries table(update function uses state_id)
+  $cityname = DB::table('contractors')->join('cities','cities.id','contractors.city')->where('contractors.user_id',$showdetailedcontractor->user_id)->pluck('cities.name')
+        ->first();
 
  
     $review = DB::table('documents')
