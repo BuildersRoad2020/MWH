@@ -106,7 +106,7 @@
                             <label>{{ __('Country') }} </label>
                             <select name="country" id="country" class="form-control @error('country') is-invalid @enderror">             
                                        @foreach($countries as $key =>$country)  @if($key > 0) 
-                                    <option value="{{ $country->id }}" > {{ $country->country}} </option>  @endif
+                                    <option value="{{ $country->id }}" > {{ $country->id}} </option>  @endif
                                         @endforeach         
                             </select> 
                             <span id="loadercountry"><i class="fa fa-spinner fa-3x fa-spin"></i></span>
@@ -123,7 +123,7 @@
                             <label>{{ __('State') }}  </label>
                             <select name="state" id="state" class="form-control @error('state') is-invalid @enderror">  
                                         @foreach($states as $state)
-                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                    <option value="{{ $state->id }}">{{ $state->id }}</option>
                                         @endforeach 
                             </select> 
                             <span id="loaderstate"><i class="fa fa-spinner fa-3x fa-spin"></i></span>
@@ -140,7 +140,7 @@
                             <label>{{ __('City') }}  </label>
                             <select name="city" id="city" class="form-control @error('city') is-invalid @enderror">
                                     @foreach($cities as $city)
-                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                    <option value="{{ $city->id }}">{{ $city->id }}</option>
                                     @endforeach 
                                     </select> 
                                 @error('city')
