@@ -45,16 +45,16 @@
                         <td> {{ $contractors->address}}  </td>
                         <tr></tr>
                         <th>City </th>
-                        <td> {{ $cityname->name }}   </td> 
+                        <td> {{ $cityname }}   </td> 
                         <tr></tr>
                         <th>POST CODE </th>
                         <td> {{ $contractors->postcode}}  </td>
                         <tr></tr>
                         <th>State </th>
-                        <td> {{ $statename->name}}  </td>
+                        <td> {{ $statename}}  </td>
                         <tr></tr>
                         <th>Country </th>
-                        <td> {{ $countryname->country}}   </td>      
+                        <td> {{ $countryname}}   </td>      
                         <tr></tr>
                         <th>Alt Contact </th>
                         <td> {{ $contractors->Name_secondarycontact}}  </td>
