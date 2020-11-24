@@ -382,7 +382,7 @@
 
                     $.each(data, function(key, value){
 
-                        $('select[name="state"]').append('<option value="'+ key +'">' + value + '</option>');
+                        $('select[name="state"]').append('<option value="'+ key +'">' + key + '</option>');
 
                     });
                 },
@@ -417,7 +417,7 @@
 
                     $.each(data, function(key, value){
                    
-                        $('select[name="city"]').append('<option value="'+ key +'">' + value + '</option>');
+                        $('select[name="city"]').append('<option value="'+ key +'">' + key + '</option>');
 
                     });
                 },
