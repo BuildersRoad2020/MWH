@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Forms extends Model
 {
 	  protected $fillable = [
-                          'id', 'Doc_Desc', 'FileName', 'Country', 'Type', 
+                          'id', 'Doc_Desc', 'FileName', 'Country', 'Type', 'Mandatory',
    						          ];
       public function Forms() {
       }

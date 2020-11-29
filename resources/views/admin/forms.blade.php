@@ -96,7 +96,11 @@
                     <script type="text/javascript">
                         $('#Add').modal('show');
                     </script>
-                    @endif                                    
+                    @endif     
+
+                                                               <br>
+                                                                <input type="checkbox" name="Mandatory" value="1">                        
+                                                                <label for="Mandatory"> Required </label>   <br>                                                   
 
                 </div>
                 <div class="modal-footer">
@@ -164,7 +168,8 @@
                                         <thead>  
                                             <th > Document Description</th>
                                             <th> Type</th>
-                                            <th > File</th>                                
+                                            <th> Mandatory </th>
+                                            <th > Template </th>                                
                                             <th> Country</th>     
                                             <th colspan="2" class="text-center"> Action </th>                            
                                         </thead>
@@ -173,7 +178,8 @@
                                             <tr>  </tr>
                                             <td>  {{$form->Doc_Desc }} </td>                                 
                                             <td>  {{$form->Type }}</td>   
-                                            <td> <small><i class=" {{$form->FileName == null ? 'fa fa-circle text-secondary' : ' '}}"></i> {{$form->FileName == null ? 'None' : ''}} 
+                                            <td>  <span class="{{$form->Mandatory == 0 ? '' : 'badge text-white' }} "> {{$form->Mandatory == 0 ? '' : 'Yes' }}  </span> </td> 
+                                            <td> <small><i class=" {{$form->FileName == null ? '' : ' '}}"></i> {{$form->FileName == null ? '' : ''}} 
                                                 <a href="{{ asset('storage/app/forms/') . '/' . $form->FileName}}" target="_blank"> 
                                                     <i class=" {{ $form->FileName != Null ? 'fa fa-circle text-info'  : ''}}">   </i>   {{$form->FileName == null ? '' : 'View'}}  </a>
                                                 </small> </td>  
@@ -237,7 +243,11 @@
                                                                 <label>{{ __('Select File') }}</label>                                               
                                                                 <input type="text"  name="Doc_Desc" value="{{$form->Doc_Desc}}" placeholder="{{$form->Doc_Desc}}" class="hidden" >
                                                                 <input type="File" name="FileName" class="form-control @error('FileName') is-invalid @enderror "  >
-                                                                <small class="text-danger"><small> Document should be in PDF Format | Max size 2 MB</small> </small>
+                                                                &nbsp;
+                                                                <input type="checkbox" name="Mandatory" value="1" {{ '1' ==old('Mandatory', $form->Mandatory  ) ? 'checked' : ' ' }}>                        
+                                                                <label for="Mandatory"> Required </label>   <br>
+
+                                                                <small class="text-danger mx-auto"><small> Document should be in PDF Format | Max size 2 MB</small> </small>
                                                                 @error('FileName')
                                                                 <small class="text-danger">
                                                                     {{ $message }}
@@ -247,6 +257,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>        
                                                                 <button type="submit" class="btn btn-info" value="{{$form->id}}" name="id">Yes</button>
+
                                                             </div>
                                                         </div>
                                                     </div>

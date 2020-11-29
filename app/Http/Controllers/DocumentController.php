@@ -235,7 +235,7 @@ $forms = DB::table('forms')
 ->Orderby('forms.Doc_Desc', 'ASC')
 ->Where('forms.Type','LIKE','%'.$Type.'%')
 ->Where('countries.country','LIKE','%'.$Country.'%')      
-->select('forms.Doc_Desc','forms.FileName','countries.country','forms.Type', 'forms.id',)
+->select('forms.Doc_Desc','forms.FileName','countries.country','forms.Type', 'forms.id', 'forms.Mandatory')
 ->paginate(15);   
 
 $types = Forms::distinct()
@@ -284,6 +284,7 @@ $request->file('FileName')->move($FilePath, $FileName); //save actual file to st
 
 $upload = Forms::find($id);
 $upload->FileName = $FileName;
+$upload->Mandatory = $request['Mandatory'];
 $upload->save();
 
 return back()->withInput()->with('status','Document updated successfully!');
@@ -316,6 +317,7 @@ $forms->Doc_Desc = $request->Doc_Desc;
 $forms->FileName = $FileName;    
 $forms->Type = $request->Type;
 $forms->Country = $request->Country;
+$forms->Mandatory = $request['Mandatory'];
 $forms->save();
 
 return back()->withInput()->with('status','Document updated successfully!');

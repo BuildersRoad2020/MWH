@@ -13,11 +13,11 @@ class FormSeeder extends Seeder
     {
         $Forms = [
 
-	['id'=>'1','Doc_Desc'=>'Financial Detail Confirmation','Country'=>'2','Type'=>'Financial'],
-	['id'=>'2','Doc_Desc'=>'Public Liability Insurance','Country'=>'2','Type'=>'Insurance'],
+	['id'=>'1','Doc_Desc'=>'Financial Detail Confirmation','Country'=>'2','Type'=>'Financial', 'Mandatory'=>'1'],
+	['id'=>'2','Doc_Desc'=>'Public Liability Insurance','Country'=>'2','Type'=>'Insurance', 'Mandatory'=>'1'],
 	['id'=>'3','Doc_Desc'=>'Public Indemnity Insurance','Country'=>'2','Type'=>'Insurance'],
-	['id'=>'4','Doc_Desc'=>'SWMS Building, Property and Site Maintenance','Country'=>'2','Type'=>'Safety'],
-	['id'=>'5','Doc_Desc'=>'SWMS Communication Equipment','Country'=>'2','Type'=>'Safety'],
+	['id'=>'4','Doc_Desc'=>'SWMS Building, Property and Site Maintenance','Country'=>'2','Type'=>'Safety', 'Mandatory'=>'1'],
+	['id'=>'5','Doc_Desc'=>'SWMS Communication Equipment','Country'=>'2','Type'=>'Safety', 'Mandatory'=>'1'],
 	['id'=>'6','Doc_Desc'=>'New South Wales Work Area Coverage','Country'=>'2','Type'=>'Work Area'],
 	['id'=>'7','Doc_Desc'=>'Australian Capital Territory Work Area Coverage','Country'=>'2','Type'=>'Work Area'],
 	['id'=>'8','Doc_Desc'=>'Northern Territory Work Area Coverage','Country'=>'2','Type'=>'Work Area'],
@@ -43,7 +43,7 @@ class FormSeeder extends Seeder
 	['id'=>'28','Doc_Desc'=>'Working With Children Cards','Country'=>'2','Type'=>'Individual'],
 	['id'=>'29','Doc_Desc'=>'WPCG Certificate','Country'=>'2','Type'=>'Individual'],
 	['id'=>'30','Doc_Desc'=>'Terms and Conditions','Country'=>'2','Type'=>'Agreement'],
-	['id'=>'31','Doc_Desc'=>'Non Disclosure Agreement','Country'=>'2','Type'=>'Agreement'],
+	['id'=>'31','Doc_Desc'=>'Non Disclosure Agreement','Country'=>'2','Type'=>'Agreement', 'Mandatory'=>'1'],
 
         ];
 

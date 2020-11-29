@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Contractor;
+use App\Contractor; use App\Forms;
 use App\User;
 use App\SkillSet;
 use App\Country;
@@ -21,6 +21,7 @@ class ShowContractorsController extends Controller
 {
 
   public function index() {
+
     $showcontractors = Contractor::where('role', 2)
     ->orderBy('contractor_name')
     ->paginate(25);
@@ -88,23 +89,10 @@ public function update(Contractor $showdetailedcontractor, Request $request) { /
     'status' => 'required',
   ]);
 
-  $checkFDC = Document::where(['contractor_id'=> $showdetailedcontractor->user_id])
-->where('FormID',[1])   //Financial Detail Confirmation     
-->count();
+  $Mandatory = Forms::where('Mandatory', '1')->count();
+  $CheckMandatory = DB::table('documents')->where(['contractor_id'=> $showdetailedcontractor->user_id])->join('forms','forms.id','=','documents.FormID')->select('id')->count();
 
-$checkPLI = Document::where(['contractor_id'=> $showdetailedcontractor->user_id])
-->where('FormID',[2])   // Public Liability Insurance     
-->count();      
-
-$checkSWMS = Document::where(['contractor_id'=> $showdetailedcontractor->user_id])
-->where('FormID',[4]) // SWMS Building Property and Site Maintenance        
-->count();     
-
-$checkSWMS2 = Document::where(['contractor_id'=> $showdetailedcontractor->user_id])
-->where('FormID',[5])  // SWMS Communication Equipment      
-->count();      
-
-if($checkFDC == 0 || $checkPLI == 0 || $checkSWMS == 0 || $checkSWMS2 == 0)
+if($Mandatory != $CheckMandatory)
 {
   return back()->withInput()->with('status','Incomplete Documents!');   
 }

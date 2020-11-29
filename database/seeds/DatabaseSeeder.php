@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $user = new App\User();
-        $user->password = Hash::make('Support123!');
+        $user->password = Hash::make('Romans123!');
         $user->email = 'support@engagis.com';
         $user->name = 'Support Admin';
         $user->role = '1';
