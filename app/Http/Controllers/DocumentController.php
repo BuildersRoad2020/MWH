@@ -62,6 +62,7 @@ return view ('vendor.upload',[
 
 public function techniciandocs(Technician $id) {
 
+  $this->authorize('view', $id); 
   $Doc_Descs = DB::table('forms')
   ->where('Type', '=','Individual')->get();
 
