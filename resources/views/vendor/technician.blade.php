@@ -14,10 +14,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="text-info">My Technicians  </h4> 
+                        <h4 class="text-info">My Technicians  </h4> <br>
 
                     </div>
-
+                        @if($count != 0)
                     <div class="content table-responsive table-full-width">
                         <table class="table table-hover table-striped"> 
                             <thead class="thead-dark">
@@ -47,7 +47,7 @@
                                 </tbody>
                             </table>
                             {{ $showtechnicians->links() }}                      
-                        </div>
+                        </div> @else @endif
                     </div>   
                 </div>
             </div>

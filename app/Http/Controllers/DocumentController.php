@@ -48,10 +48,14 @@ $FDC = Forms::where('id', '1') //financial detail form
 ->pluck('FileName')
 ->first();
 
+$count = count($document);
+
+
 return view ('vendor.upload',[
   'document' => $document,
   'Doc_Descs' => $Doc_Descs,
   'FDC' => $FDC,
+  'count' => $count
 ]);
 
 }
@@ -66,7 +70,9 @@ public function techniciandocs(Technician $id) {
   ->where('individual_docs.contractor_id', auth()->user()->id)
   ->Orderby('forms.Doc_Desc', 'ASC')->select('forms.Doc_Desc','individual_docs.FileName','individual_docs.Expiration','countries.Country','individual_docs.Coverage','individual_docs.Status')->paginate(15);
 
-  return view ('vendor.individualdocs',['Doc_Descs' => $Doc_Descs, 'document' => $document, 'id' => $id]);
+  $count = count($document);
+
+  return view ('vendor.individualdocs',['Doc_Descs' => $Doc_Descs, 'document' => $document, 'id' => $id, 'count' => $count,]);
 }
 
 public function individualuploads(Request $request,Technician $id){
@@ -129,16 +135,16 @@ public function index2() {       //vendor document dashboard2
   ->select('Doc_Desc', 'id',)
   ->get();      
 
-
+  $count = count($document2);
   return view ('vendor.upload2',[
     'document2' => $document2,
     'Doc_Descs2' => $Doc_Descs2,
+    'count' => $count,
   ]);
 
 }
 
 public function upload(Request $request) { //vendor document dashboard1
-
 
 
 

@@ -8,12 +8,12 @@
       <div class="col-md-12">
         <div class="card">
           <div class="header">
-            <h4 class="text-info">{{ config('app.name') }} Documents   </h4>
+            <h4 class="text-info">{{ config('app.name') }} Documents   </h4> <br>
 
 
           </div>
 
-
+          @if($count > 0)  
           <div class="content table-responsive table-full-width">
 
             <table class="table table-hover table-striped">    
@@ -80,8 +80,8 @@
                           </tbody>
                         </table>
                         {{ $Review->links() }}
-                      </div>
-
+                      </div> @else @endif
+                        @if($count2 > 0)  
                       <table class="table table-hover table-striped">    
                         <thead>  
                           <th> Contractor Name </th>
@@ -180,7 +180,7 @@
                                       <td colspan="9" class="text-right"> <span class="text-warning"> <small>* Succeeding Rates</small></span></td>
                                     </tr>
                                   </tfoot>
-                                </table>        
+                                </table>     @else @endif   
 
                               </div>
                             </div>

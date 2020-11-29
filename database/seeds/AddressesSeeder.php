@@ -61,6 +61,18 @@ class AddressesSeeder extends Seeder
         ['id' => '11','state_id' => '6', 'name' => 'Alberta 2'],
         ['id' => '12','state_id' => '7', 'name' => 'BC 1'],
         ['id' => '13','state_id' => '7', 'name' => 'BC 2'],      
+        ['id' => '14','state_id' => '8', 'name' => 'Gis 3'],
+        ['id' => '15','state_id' => '8', 'name' => 'Alberta 4'],
+        ['id' => '16','state_id' => '9', 'name' => 'Alberta 5'],
+        ['id' => '17','state_id' => '9', 'name' => 'BC Test6'],
+        ['id' => '18','state_id' => '10', 'name' => 'BC Test 7'],    
+        ['id' => '19','state_id' => '10', 'name' => 'BC 2'],      
+        ['id' => '20','state_id' => '11', 'name' => 'Gis 3 Test New'],
+        ['id' => '21','state_id' => '11', 'name' => 'Alberta 6'],
+        ['id' => '22','state_id' => '12', 'name' => 'Alberta 7'],
+        ['id' => '23','state_id' => '12', 'name' => 'ABC Test6'],
+        ['id' => '24','state_id' => '13', 'name' => 'BC Test 8'],      
+        ['id' => '25','state_id' => '13', 'name' => 'BC Test 9'],                    
         ];
         
         foreach($cities as $city){

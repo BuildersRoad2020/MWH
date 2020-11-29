@@ -81,20 +81,7 @@
                         @endif                                    
                         <br/>
 
-                        <label>{{ __('Coverage') }}</label>
-                        <input type="text" class="form-control" name="Coverage"  maxlength="10"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >
-                        <small class="text-info"><small> If Applicable</small> </small>
-                        @error('Coverage')
-                        <small class="text-danger">
-                            {{ $message }}
-                        </small>
-                        @enderror
-                        @if (count($errors) > 0)
-                        <script type="text/javascript">
-                            $('#Add').modal('show');
-                        </script>
-                        @endif                                    
-                        <br/>
+ 
                     </div>
 
 
@@ -119,12 +106,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="text-info"> My Work Area & Technical Documents  </h4>                             
+                        <h4 class="text-info"> My Work Area & Technical Documents  </h4>  <br />                     
                     </div> 
 
 
 
-
+                    @if($count != 0)
                     <div class="content" >  
                         <div class="col-md-12">
                             <div class="row">
@@ -162,7 +149,7 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> @else @endif
                 </div>
             </div>
         </div>

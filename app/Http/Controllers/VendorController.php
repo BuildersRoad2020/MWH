@@ -245,9 +245,12 @@ $showtechnicians = Technician::where('contractor_id', auth()->user()->id)
 $contractors = Contractor::where('user_id', auth()->user()->id)
 ->first();
 
+$count = count($showtechnicians);
+
 return view ('vendor.technician', [
   'showtechnicians' => $showtechnicians,
-  'contractors' => $contractors,    
+  'contractors' => $contractors,  
+  'count' => $count,  
 ]);
 }
 

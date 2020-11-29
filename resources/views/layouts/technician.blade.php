@@ -11,8 +11,6 @@
 
     <!-- Animation library for notifications   -->
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet"/>
-
-
     <!--   Core JS Files   -->
 
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,9 +18,6 @@
     <script src="{{ asset('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-
-
-
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

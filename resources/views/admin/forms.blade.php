@@ -179,14 +179,16 @@
                                                 </small> </td>  
                                                 <td>  {{$form->country }} </td>  
                                                 <td> 
-                                                    <button type="button" class="btn btn-danger btn-simple btn-xs pull-right" data-toggle="modal" data-target="#Remove{{$form->id}}" title="Remove" value="{{$form->id}}">
-                                                        <i class="fa fa-times"></i>
-                                                    </button> 
-                                                </td>         
-                                                <td class="pull-left">
                                                     <button type="button" class="btn btn-info btn-simple btn-xs pull-right" data-toggle="modal" data-target="#Upload{{$form->id}}" title="Edit" value="{{$form->id}}">
                                                         <i class="fa fa-edit"></i>
                                                     </button> 
+                                                </td>         
+                                                <td class="pull-left">
+
+
+                                                    <button type="button" class="btn btn-danger btn-simple btn-xs pull-right" data-toggle="modal" data-target="#Remove{{$form->id}}" title="Remove" value="{{$form->id}}">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>                                                     
 
                                                 </td>  
                                                 <tr></tr>

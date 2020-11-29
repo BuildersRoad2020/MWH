@@ -12,9 +12,9 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h4 class="text-info">{{ config('app.name') }} Contractors   </h4>
+                            <h4 class="text-info">{{ config('app.name') }} Contractors   </h4> <br/>
                         </div>
-
+                            @if($count > 0)  
                         <div class="content table-responsive table-full-width">
                             <table class="table table-hover table-striped">   
                                 <thead>
@@ -42,7 +42,7 @@
                                     </tbody>
                                 </table>
                                 {{ $showcontractors->links() }}
-                            </div>
+                            </div> @else @endif
                         </div>
                     </div>
                 </div>

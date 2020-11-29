@@ -24,8 +24,11 @@ class ShowContractorsController extends Controller
     $showcontractors = Contractor::where('role', 2)
     ->orderBy('contractor_name')
     ->paginate(25);
+
+    $count = count($showcontractors);
     return view ('admin.showcontractors', [
-      'showcontractors' => $showcontractors
+      'showcontractors' => $showcontractors,
+      'count' => $count,
     ]);
   }
 

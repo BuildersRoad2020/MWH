@@ -126,12 +126,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="text-info"> My Insurance, Financial and Safety Documents  </h4>                             
+                        <h4 class="text-info"> My Insurance, Financial and Safety Documents  </h4>   <br>                      
                     </div> 
 
 
-
-
+                    @if($count != 0)
                     <div class="content" >  
                         <div class="col-md-12">
                             <div class="row">
@@ -169,7 +168,7 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> @else @endif
                 </div>
             </div>
         </div>

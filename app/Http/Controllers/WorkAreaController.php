@@ -26,60 +26,47 @@ class WorkAreaController extends Controller
     ->leftjoin('rates', 'rates.FormId', '=', 'documents.FormID')->distinct('rates.Class')
     ->get(['forms.Doc_Desc', 'work_areas.Type','documents.FormID', 'countries.country','documents.Status', 'work_areas.ID', 'rates.Rate', 'rates.Rate2', 'rates.Class' ])->groupBy('Doc_Desc')->map(function ($Rate, $key) { return $Rate;});
 
-
+    $count = count($Original);
     $Rates = DB::table('rates')
     ->join('forms', 'forms.id' ,'=', 'rates.FormID')->where('rates.contractor_id', auth()->user()->id )->OrderBy('forms.Doc_Desc','ASC')
     ->join('documents', 'documents.FormID', '=', 'rates.formID')
     ->join('countries', 'countries.ID', '=', 'forms.country')->distinct('rates.Class')    		
     ->get(['rates.Class', 'rates.Rate', 'rates.Rate2','forms.Doc_Desc', 'documents.status', 'countries.country'])->groupBy('Doc_Desc')->map(function ($Rate, $key) { return $Rate;});
 
-
+    $otherscount = DB::table('rates')->where('contractor_id', auth()->user()->id)->where('Class','<>', 'Metro')->where('Class','<>', 'Regional')
+    ->where('Class','<>', 'Regional')->count(); 
 
     return view('vendor.workarea',
-      ['Original'=> $Original, 'Rates' => $Rates,
+      ['Original'=> $Original, 'Rates' => $Rates, 'count' => $count, 'otherscount' => $otherscount,
     ]);
 
   }
 
   public function addrates(Request $request) {
 
-/*  $request->validate([
-      'Type' => 'required',
-      'Rate' => ['excludeif:Type,true','numeric|nullable'],
-      'Rate2' => ['excludeif:Type,true','numeric|nullable'] //['excludeif:Type,true',],     
-    ],
-    [   'Type.required' => 'Select at least one State Type.',
-
-
-    if( !empty ($request->Type)) {
-       $request->validate([
-          'Rate' => ['numeric'],
-          'Rate2' => ['numeric'],
-        ]);
-    }
-
-
-  ]); */
-
     $Type = $request['Type'];
     $FormID = $request['FormID']; 
     $Rate = $request['Rate'];  
     $Rate2 = $request['Rate2'];      
-    $Class = $request['Class'];	 
+    $Class = $request['Class'];  
+
+    $countype = count((array)$Type);
+
+    if ($countype < 1 ) {
+     return back()->withInput()->with('status','No rate uploaded');
+    }
 
     foreach($Type as $key=>$Type) {
 
-
-
       $upload = WorkArea::updateorCreate(
         ['contractor_id' => auth()->user()->id,   'FormID' => $FormID[$key], 'Type' => $Type  ],
-        [ ],	); 
+        [ ],  ); 
     }
 
     foreach($Class as $key=>$Class) {
       $test = Rates::updateorcreate(
         ['contractor_id' => auth()->user()->id, 'FormID' => $FormID[$key], 'Class' => $Class ],
-        ['Rate' => $Rate[$key], 'Rate2' => $Rate2[$key] ],	);	
+        ['Rate' => $Rate[$key], 'Rate2' => $Rate2[$key] ],  );  
     } 
 
 
@@ -95,6 +82,7 @@ class WorkAreaController extends Controller
         return back()->withInput()->with('status','Document updated successfully!');
 
       } 
+
 
 public function deleterates(Request $request) { //Delete function vendor rates
   $ID = $request['deleteformID'];    

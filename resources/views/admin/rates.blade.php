@@ -22,8 +22,8 @@
       <div class="col-md-12">
         <div class="card">
           <div class="header">
-            <h4 class="text-info"> Review Rates </h4>                             
-          </div> 
+            <h4 class="text-info"> Review Rates </h4>   <br />                           
+          </div>  @if($count > 0)  
           @if(isset($Rates))
           <table class="table table-hover table-striped">    
             <thead>  
@@ -97,7 +97,7 @@
                       </tfoot>
                     </table>
                     @endif
-
+                        @else @endif
                   </div>
                 </div></div></div> </div>
                 @endsection

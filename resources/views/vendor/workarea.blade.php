@@ -7,12 +7,12 @@
       <div class="col-md-12">
         <div class="card">
           <div class="header">
-            <h4 class="text-info"> My Rates </h4>                             
+            <h4 class="text-info"> My Rates </h4>   <br>                         
           </div> 
 
 
 
-
+            @if($count != 0)
           <div class="content" >  
 
             <div class="col-md-12">  
@@ -260,7 +260,8 @@
         </div>
 
       </div>
-    </div>                    
+    </div>    @else @endif   
+     @if($otherscount > 0)              
     <div class="col-md-5">   <div class="card">        
       <table class="table table-hover table-striped">    
         <thead>  
@@ -291,7 +292,7 @@
     </div>
 
 
-  </div>
+  </div> @else @endif
 </div>
 </div>
 </div>

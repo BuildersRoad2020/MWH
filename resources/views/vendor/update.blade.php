@@ -104,7 +104,8 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label>{{ __('Country') }} </label>
-                                            <select name="country" id="country" class="form-control @error('country') is-invalid @enderror">             
+                                            <select name="country" id="country" class="form-control @error('country') is-invalid @enderror">    
+                                                <option value="{{ $countryname->id }}" selected hidden> {{ $countryname->country}} </option> 
                                                 @foreach($countries as $key =>$country)  @if($key > 0) 
                                                 <option value="{{ $country->id }}" > {{ $country->country}} </option>  @endif
                                                 @endforeach         
@@ -122,6 +123,7 @@
                                         <div class="form-group">
                                             <label>{{ __('State') }}  </label>
                                             <select name="state" id="state" class="form-control @error('state') is-invalid @enderror">  
+                                            <option value="{{ $statename->id }}" selected hidden> {{ $statename->name}} </option>                                                 
                                                 @foreach($states as $state)
                                                 <option value="{{ $state->id }}">{{ $state->name }}</option>
                                                 @endforeach 
@@ -139,6 +141,7 @@
                                         <div class="form-group">
                                             <label>{{ __('City') }}  </label>
                                             <select name="city" id="city" class="form-control @error('city') is-invalid @enderror">
+                                            <option value="{{ $cityname->id }}" selected hidden> {{ $cityname->name}} </option>                                                
                                                 @foreach($cities as $city)
                                                 <option value="{{ $city->id }}">{{ $city->name }}</option>
                                                 @endforeach 

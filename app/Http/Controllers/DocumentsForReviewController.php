@@ -17,6 +17,8 @@ class DocumentsForReviewController extends Controller
     ->where('documents.Status', '<>', '2')->OrderBy('forms.Type')->OrderBy('forms.Doc_Desc')
     ->select('forms.Doc_Desc', 'documents.Status','documents.Coverage', 'documents.Expiration', 'contractors.contractor_name', 'contractors.currency', 'documents.id', 'documents.FileName')->paginate('15');
 
+    $count = count($Review);
+
     $Rates =  DB::table('rates')
     ->join('forms', 'forms.id' ,'=', 'rates.FormID')
     ->join('documents', 'documents.FormID', '=', 'rates.formID')
@@ -24,10 +26,10 @@ class DocumentsForReviewController extends Controller
     ->join('countries', 'countries.ID', '=', 'forms.country') ->where('documents.Status', '<>', '2')->OrderBy('forms.Doc_Desc')
     ->get(['rates.Class', 'rates.Rate', 'rates.Rate2','forms.Doc_Desc','documents.FileName', 'documents.Status', 'countries.country', 'contractors.contractor_name', 'documents.id',])->groupBy('Doc_Desc')->map(function ($Rate, $key) { return $Rate;});
 
-
+    $count2 = count($Rates); 
 
     return view ('admin.review',[
-      'Review' => $Review, 'Rates' => $Rates
+      'Review' => $Review, 'Rates' => $Rates, 'count' => $count, 'count2' => $count2,
       
     ]);
 
@@ -61,8 +63,10 @@ class DocumentsForReviewController extends Controller
     ->OrderBy('forms.Doc_Desc')->distinct('rates.Class')     
     ->get(['rates.Class', 'rates.Rate', 'rates.Rate2','forms.Doc_Desc','documents.FileName', 'documents.Status', 'countries.country', 'contractors.contractor_name'])->groupBy('contractor_name')->map(function ($Rate, $key) { return $Rate;});
 
+    $count = count($Rates);
+
     return view('admin.rates',[
-      'Rates' => $Rates,
+      'Rates' => $Rates, 'count' => $count,
     ]);
   }
 
