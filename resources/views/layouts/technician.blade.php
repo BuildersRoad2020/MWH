@@ -33,127 +33,127 @@
     <link href="{{ asset('assets/css/light-bootstrap-dashboard.css?v=1.4.0') }}" rel="stylesheet"/>
 
     <!-- Styles -->
-  
+
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <body > 
-<div class="wrapper" >
+    <div class="wrapper" >
 
-    <div class="sidebar" data-color="azure" data-image="{{ asset('assets/img/1.jpg') }}">
+        <div class="sidebar" data-color="azure" data-image="{{ asset('assets/img/1.jpg') }}">
 
-    <!--
+<!--
 
-        sidebar : data-color="blue | azure | green | orange | red | purple"
+sidebar : data-color="blue | azure | green | orange | red | purple"
 
-    -->
+-->
 
-        <div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="{{ url('/') }}" class="simple-text">
-                    {{ config('app.name') }}
-                </a>
-            </div>
-
-            <ul class="nav">
-                <li class="{{ request()->routeIs('technician.index')? 'active' : '' }}">
-                    <a href="{{ route('vendor.index')}}">
-                        <i class="pe-7s-portfolio"></i>
-                        <p>Details</p>
-                    </a>
-                </li>                       
-
-            </ul>
-        </div>
+<div class="sidebar-wrapper">
+    <div class="logo">
+        <a href="{{ url('/') }}" class="simple-text">
+            {{ config('app.name') }}
+        </a>
     </div>
 
+    <ul class="nav">
+        <li class="{{ request()->routeIs('technician.index')? 'active' : '' }}">
+            <a href="{{ route('vendor.index')}}">
+                <i class="pe-7s-portfolio"></i>
+                <p>Details</p>
+            </a>
+        </li>                       
+
+    </ul>
+</div>
+</div>
 
 
-    <div class="main-panel">
-        <nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
 
-                </div>
-                <div class="collapse navbar-collapse">
+<div class="main-panel">
+    <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-                    <ul class="nav navbar-nav navbar-right">
-
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-                                         {{ Auth::user()->name }} 
-                                        <b class="caret"></b>
-                                    </p>
-
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="{{ route('logout') }}"  onclick="event.preventDefault();                                                    document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}</a>                                    
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form></li>
-                              </ul>
-                        </li>
-                    </ul>
-                </div>
             </div>
+            <div class="collapse navbar-collapse">
 
-        </nav>
+                <ul class="nav navbar-nav navbar-right">
 
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <p>
+                                {{ Auth::user()->name }} 
+                                <b class="caret"></b>
+                            </p>
 
-
-                @if( session('status'))
-               <div class="alert alert-info text-center">
-                    <span>{{ session('status')}} </span>
-                </div>     
-
-                                
-            @endif
-
-
-
-
-  <!--Content Area!-->
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    @yield('content')
-                </div>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('logout') }}"  onclick="event.preventDefault();                                                    document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}</a>                                    
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
 
-  <!--Footer Area!-->
-        <footer class="footer">
-            <div class="container-fluid">
+    </nav>
 
-                <p class="copyright pull-right">
-                    {{ now()->year }}  {{ config('app.name') }}
-                </p>
+
+
+    @if( session('status'))
+    <div class="alert alert-info text-center">
+        <span>{{ session('status')}} </span>
+    </div>     
+
+
+    @endif
+
+
+
+
+    <!--Content Area!-->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                @yield('content')
             </div>
-
-
-
-        </footer>
-
+        </div>
     </div>
+
+    <!--Footer Area!-->
+    <footer class="footer">
+        <div class="container-fluid">
+
+            <p class="copyright pull-right">
+                {{ now()->year }}  {{ config('app.name') }}
+            </p>
+        </div>
+
+
+
+    </footer>
+
+</div>
 
 </div>
 
 </body>
 
-    @yield('scripts')
+@yield('scripts')
 
-    <script src="{{ asset('assets/js/light-bootstrap-dashboard.js?v=1.4.0') }}"></script>
-       
-   
+<script src="{{ asset('assets/js/light-bootstrap-dashboard.js?v=1.4.0') }}"></script>
 
- 
+
+
+
 </html>
 
 

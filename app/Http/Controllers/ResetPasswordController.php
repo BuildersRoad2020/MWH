@@ -17,12 +17,12 @@ class ResetPasswordController extends Controller
     public function resetPassword(Request $request){
 
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-            // The passwords matches
+// The passwords matches
             return redirect()->back()->with("error","Your current password does not match with the password you provided. Please try again.");
         }
 
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-            //Current password and new password are same
+//Current password and new password are same
             return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
         }
 
@@ -31,7 +31,7 @@ class ResetPasswordController extends Controller
             'new-password' => 'required|string|min:8|confirmed',
         ]);
 
-        //Change Password
+//Change Password
         $user = Auth::user();
         $user->password = bcrypt($request->get('new-password'));
         $user->email_verified_at = \Carbon\Carbon::now();
@@ -44,12 +44,12 @@ class ResetPasswordController extends Controller
     public function resetPasswordtechnician(Request $request){
 
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-            // The passwords matches
+// The passwords matches
             return redirect()->back()->with("error","Your current password does not match with the password you provided. Please try again.");
         }
 
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-            //Current password and new password are same
+//Current password and new password are same
             return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
         }
 
@@ -58,7 +58,7 @@ class ResetPasswordController extends Controller
             'new-password' => 'required|string|min:8|confirmed',
         ]);
 
-        //Change Password
+//Change Password
         $user = Auth::user();
         $user->password = bcrypt($request->get('new-password'));
         $user->email_verified_at = \Carbon\Carbon::now();
@@ -71,12 +71,12 @@ class ResetPasswordController extends Controller
     public function resetPasswordvendor(Request $request){
 
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-            // The passwords matches
+// The passwords matches
             return redirect()->back()->with("error","Your current password does not match with the password you provided. Please try again.");
         }
 
         if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-            //Current password and new password are same
+//Current password and new password are same
             return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
         }
 
@@ -85,7 +85,7 @@ class ResetPasswordController extends Controller
             'new-password' => 'required|string|min:8|confirmed',
         ]);
 
-        //Change Password
+//Change Password
         $user = Auth::user();
         $user->password = bcrypt($request->get('new-password'));
         $user->email_verified_at = \Carbon\Carbon::now();
