@@ -98,7 +98,7 @@
                           <tr>
                             <td>     @foreach($ID as $IDs) {{$IDs->contractor_name }} @break @endforeach          
                             </td> 
-                            <td>  {{ $Rate}}   </td>
+                            <td>    @foreach($ID as $IDs) {{$IDs->Doc_Desc }} @break @endforeach {{$Rate}}    </td>
 
                             <td> @foreach($ID as $IDs)  @if ($IDs->Class == 'Metro') {{$IDs->Rate }} + {{$IDs->Rate2 }}<small class="text-warning">*</small>   @break  @endif   
                               @endforeach

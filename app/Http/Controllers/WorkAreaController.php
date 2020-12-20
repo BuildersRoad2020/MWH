@@ -26,6 +26,8 @@ class WorkAreaController extends Controller
     ->leftjoin('rates', 'rates.FormId', '=', 'documents.FormID')->distinct('rates.Class')
     ->get(['forms.Doc_Desc', 'work_areas.Type','documents.FormID', 'countries.country','documents.Status', 'work_areas.ID', 'rates.Rate', 'rates.Rate2', 'rates.Class' ])->groupBy('Doc_Desc')->map(function ($Rate, $key) { return $Rate;});
 
+
+
     $count = count($Original);
     $Rates = DB::table('rates')
     ->join('forms', 'forms.id' ,'=', 'rates.FormID')->where('rates.contractor_id', auth()->user()->id )->OrderBy('forms.Doc_Desc','ASC')

@@ -22,8 +22,7 @@
                   <table class="table table-hover table-striped">    
                     <thead>  
                       <th> Document Description</th>
-                      <th> Status</th>   
-                      <th> State Types Covered</th>   
+                      <th> Status</th>    
                       
                       <th> Country  </th>     
                       <th>Metro Rates</th>   
@@ -45,10 +44,7 @@
 
                         @break @endforeach 
                       </td> 
-                      <td>  @foreach ($ID->take(3) as $IDs) <span class="{{$IDs->Type == 'Metro' ? 'badge badge-secondary' : '' }}"> 
-                       <span class="{{$IDs->Type == 'Regional' ? 'badge badge-secondary' : '' }}">
-                         <span class="{{$IDs->Type == 'Remote' ? 'badge badge-secondary' : '' }}">                                                            
-                          {{$IDs->Type }}  </span> </span> </span> @endforeach </td>
+
 
                           <td>  @foreach ($ID as $IDs) {{$IDs->country }} @break @endforeach   </td>
 
@@ -124,11 +120,11 @@
                              </div>
 
                              <div class="modal-body">
-                              <input type="checkbox" id="1" name="Class[0]" value="Metro" hidden>
+                              <input type="checkbox" id="1" name="Class[0]" value="Metro" hidden {{ 'Metro' ==old('Class[0]', $IDs->Class  ) ? 'checked' : ' ' }}>
                               <input type="text" name="FormID[0]" value="{{$IDs->FormID}}" hidden> 
                               
 
-                              <input type="checkbox" id="Metro" name="Type[0]" value="Metro" class="@error('Type') is-invalid @enderror"  > 
+                              <input type="checkbox" id="Metro" name="Type[0]" value="Metro" class="@error('Type') is-invalid @enderror"  {{ 'Metro' ==old('Type[0]', $IDs->Class  ) ? 'checked' : ' ' }}> 
                               <label for="Metro"> <p>Metro </p> </label>
                               @error('Type')
                               <p><small class="text-danger"> <small>
