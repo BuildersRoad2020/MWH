@@ -38,7 +38,7 @@
             <tbody>                        
               @foreach( $Rates as $Rate=>$ID)
               <tr>
-                <td>   {{ $Rate}} </td>
+                <td>    @foreach($ID as $IDs)  {{$IDs->contractor_name }} @break @endforeach     </td>
                 <td>     @foreach($ID as $IDs)  {{$IDs->Doc_Desc }} @break @endforeach             
                 </td> 
 
