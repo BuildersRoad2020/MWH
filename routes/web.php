@@ -17,6 +17,7 @@ use App\Http\Middleware\Vendor;
 
 Route::middleware(['admin'])->group( function() {
 
+
 	Route::get('/', 'AdminController@index'); //routes to homepage default
 	Route::post('/admin/changepassword', 'ResetPasswordController@resetPassword')->name('changePassword');
 	Route::get('/admin', 'AdminController@index')->name('admin.index');			//routes to homepage default
@@ -88,5 +89,6 @@ Route::middleware(['technician'])->group(function () {
 	Route::post('/technician/changepassword', 'ResetPasswordController@resetPasswordtechnician')->name('changePasswordtechnician');
 });
 //Route::get('/home', 'HomeController@index')->name('home');
+
 
 Auth::routes(['register' => false]);

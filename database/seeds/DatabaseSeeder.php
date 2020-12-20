@@ -25,5 +25,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
         FormSeeder::class,
          ]);
+
+        $this->call([
+        Form_TypeSeeder::class,
+             ]); 
     }
 }

@@ -155,7 +155,7 @@ public function update(Request $request){     //function to update db record + w
     'postcode' => 'required',       
     'state' => 'required',
     'country' => 'required',
-    'abn' => 'required',
+    'abn' => 'required|min:10|max:20',
     'Name_primarycontact' => 'required',
     'phone_primary' => ['required','regex:/^[0-9]+$/'],
     'terms' => 'required',

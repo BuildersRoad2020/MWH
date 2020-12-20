@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Contractor;
 use App\Document; use App\Technician;
 use App\Country; use App\IndividualDocs;
-use App\User;
+use App\User; use App\TypeForm;
 use App\Forms;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -238,9 +238,9 @@ $forms = DB::table('forms')
 ->select('forms.Doc_Desc','forms.FileName','countries.country','forms.Type', 'forms.id', 'forms.Mandatory')
 ->paginate(15);   
 
-$types = Forms::distinct()
-->select('type')
-->orderby('type', 'ASC')
+$types = TypeForm::distinct()
+->select('Type')
+->orderby('Type', 'ASC')
 ->get();
 
 $countries = Country::select('id','country')
@@ -265,10 +265,12 @@ return back()->withInput()->with('status','Document Removed');
 }
 
 public  function updatedocument(Request $request) {     //Documents and Forms update
+
+  
 //for Admin Dashboard
   if($request ->hasFile('FileName'))  {
     $request->validate([
-      'FileName' => ['required','mimes:pdf', 'max:2000'],
+      'FileName' => ['sometimes','mimes:pdf', 'max:2000'],
     ],
     [
       'FileName.mimes' => 'Document should be: PDF.',
@@ -287,9 +289,13 @@ $upload->FileName = $FileName;
 $upload->Mandatory = $request['Mandatory'];
 $upload->save();
 
-return back()->withInput()->with('status','Document updated successfully!');
+return back()->withInput()->with('status','Document Added Successfully!');
 }
-return back()->withInput()->with('status','No document uploaded!');
+$id = $request['id'];  
+$upload = Forms::find($id);
+$upload->Mandatory = $request['Mandatory'];
+$upload->save();
+return back()->withInput()->with('status','Document Updated Successfully');
 }
 
 public  function newdocument(Request $request) {          //add new type
@@ -299,7 +305,7 @@ public  function newdocument(Request $request) {          //add new type
       'Doc_Desc' => 'required',
       'Type' => 'required',
       'Country' => 'required',        
-      'FileName' => ['required','mimes:pdf', 'max:2000'],
+      'FileName' => ['sometimes','mimes:pdf', 'max:2000'],
     ],
     [
       'FileName.mimes' => 'Document should be: PDF.',

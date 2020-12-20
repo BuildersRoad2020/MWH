@@ -43,13 +43,13 @@
                     @endif
                     <br />                             
 
-                    <label for="type">{{ __('Type') }}  </label>
-                    <select name="Type" id="type" class="form-control @error('type') is-invalid @enderror">
+                    <label for="Type">{{ __('Type') }}  </label>
+                    <select name="Type" id="type" class="form-control @error('Type') is-invalid @enderror">
 
                         <option value="">--Type--</option>
 
                         @foreach($types as $type)
-                        <option value="{{$type->type}}"> {{$type->type}} </option> 
+                        <option value="{{$type->Type}}"> {{$type->Type}} </option> 
                         @endforeach     
 
                     </select>    
@@ -140,7 +140,7 @@
 
                                                 <option value="" selected>--Type--</option>
                                                 @foreach($types as $type)
-                                                <option value="{{$type->type}}"> {{$type->type}}</option> 
+                                                <option value="{{$type->Type}}"> {{$type->Type}}</option> 
                                                 @endforeach                                        
                                             </select></label>
 
