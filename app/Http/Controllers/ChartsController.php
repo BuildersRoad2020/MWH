@@ -92,7 +92,7 @@ foreach($WA as $row) {
 }
 $data9['chart_data9'] = json_encode($data9);
 
- //dd($data, $data2, $data3, $data4);
+ //dd($data2);
   return view('admin.charts', [
     'data' => $data, 
     'data2' => $data2, 
