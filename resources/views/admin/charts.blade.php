@@ -130,7 +130,7 @@
         display: true,
         position: "top",
         text: "Contractor Status",
-        fontSize: 10,
+        fontSize: 12,
         fontColor: "#111"
       },
       legend: {
@@ -138,7 +138,7 @@
         position: "bottom",
         labels: {
           fontColor: "#333",
-          fontSize: 8
+          fontSize: 10,
         }
       }
     };
@@ -194,7 +194,7 @@
         display: true,
         position: "top",
         text: "Australian Capital Territory Contractors",
-        fontSize: 10,
+        fontSize: 12,
         fontColor: "#111"
       },
       legend: {
@@ -202,7 +202,7 @@
         position: "bottom",
         labels: {
           fontColor: "#333",
-          fontSize: 8,
+          fontSize: 10,
         }
       },
       scales: {
@@ -266,7 +266,7 @@
         display: true,
         position: "top",
         text: "New South Wales Contractors",
-        fontSize: 10,
+        fontSize: 12,
         fontColor: "#111"
       },
       legend: {
@@ -274,7 +274,7 @@
         position: "bottom",
         labels: {
           fontColor: "#333",
-          fontSize: 8,
+          fontSize: 10,
         }
       },
       scales: {
@@ -338,7 +338,7 @@
         display: true,
         position: "top",
         text: "Queensland Contractors",
-        fontSize: 10,
+        fontSize: 12,
         fontColor: "#111"
       },
       legend: {
@@ -346,7 +346,7 @@
         position: "bottom",
         labels: {
           fontColor: "#333",
-          fontSize: 8,
+          fontSize: 10,
         }
       },
       scales: {
@@ -410,7 +410,7 @@
         display: true,
         position: "top",
         text: "Northern Territory Contractors",
-        fontSize: 10,
+        fontSize: 12,
         fontColor: "#111"
       },
       legend: {
@@ -418,7 +418,7 @@
         position: "bottom",
         labels: {
           fontColor: "#333",
-          fontSize: 8,
+          fontSize: 10,
         }
       },
       scales: {
@@ -482,7 +482,7 @@
         display: true,
         position: "top",
         text: "Southern Australia Contractors",
-        fontSize: 10,
+        fontSize: 12,
         fontColor: "#111"
       },
       legend: {
@@ -490,7 +490,7 @@
         position: "bottom",
         labels: {
           fontColor: "#333",
-          fontSize: 8,
+          fontSize: 10,
         }
       },
       scales: {
@@ -554,7 +554,7 @@
         display: true,
         position: "top",
         text: "Tasmania Contractors",
-        fontSize: 10,
+        fontSize: 12,
         fontColor: "#111"
       },
       legend: {
@@ -562,7 +562,7 @@
         position: "bottom",
         labels: {
           fontColor: "#333",
-          fontSize: 8,
+          fontSize: 10,
         }
       },
       scales: {
@@ -626,7 +626,7 @@
         display: true,
         position: "top",
         text: "Victoria Contractors",
-        fontSize: 10,
+        fontSize: 12,
         fontColor: "#111"
       },
       legend: {
@@ -634,7 +634,7 @@
         position: "bottom",
         labels: {
           fontColor: "#333",
-          fontSize: 8,
+          fontSize: 10,
         }
       },
       scales: {
@@ -698,7 +698,7 @@
         display: true,
         position: "top",
         text: "Western Australia Contractors",
-        fontSize: 10,
+        fontSize: 12,
         fontColor: "#111"
       },
       legend: {
@@ -706,7 +706,7 @@
         position: "bottom",
         labels: {
           fontColor: "#333",
-          fontSize: 8,
+          fontSize: 10,
         }
       },
       scales: {
