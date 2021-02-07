@@ -27,13 +27,25 @@
       <div class="row">
            <h5 class="text-info col-sm-9">Contractors Per State </h5>    
       </div>
-    
-      <dl class="row">
-      <dt class="col-sm-3"> ACT </dt>
-      <dd class="col-sm-9">  @for($i=0;$i<count($data2['label_act']);$i++)  {{$data2['label_act'][$i]}}:  <span class="badge text-white"> {{$data2['data_act'][$i]}} </span>  @endfor</dd>
-      <dt class="col-sm-3"> NSW </dt>
-      <dd class="col-sm-9">  @for($i=0;$i<count($data3['label_nsw']);$i++)  {{$data3['label_nsw'][$i]}}:  <span class="badge text-white"> {{$data3['data_nsw'][$i]}}  </span>  @endfor</dd>
 
+       <dl class="row">
+       <dt class="col-sm-3"> ACT </dt>
+      <dd class="col-sm-9"> @if (empty($data2['label_act'])) <span class="text-warning"> None </span> @elseif (!empty($data2['label_act'])) @for($i=0;$i<count($data2['label_act']);$i++)  {{$data2['label_act'][$i]}}:  <span class="badge text-white"> {{$data2['data_act'][$i]}} </span> @endfor  @endif  </dd>
+       <dt class="col-sm-3"> NSW </dt>
+      <dd class="col-sm-9"> @if (empty($data3['label_nsw'])) <span class="text-warning"> None </span> @elseif (!empty($data3['label_nsw']))  @for($i=0;$i<count($data3['label_nsw']);$i++)  {{$data3['label_nsw'][$i]}}:  <span class="badge text-white"> {{$data3['data_nsw'][$i]}}  </span> @endfor  @endif  </dd>
+      <dt class="col-sm-3"> QLD </dt>
+      <dd class="col-sm-9"> @if (empty($data4['label_qld'])) <span class="text-warning"> None </span> @elseif (!empty($data4['label_qld']))  @for($i=0;$i<count($data4['label_qld']);$i++)  {{$data4['label_qld'][$i]}}:  <span class="badge text-white"> {{$data4['data_qld'][$i]}}  </span>  @endfor  @endif  </dd>
+      <dt class="col-sm-3"> NT </dt>
+      <dd class="col-sm-9"> @if (empty($data5['label_nt'])) <span class="text-warning"> None </span> @elseif (!empty($data5['label_nt']))  @for($i=0;$i<count($data5['label_nt']);$i++)  {{$data5['label_nt'][$i]}}:  <span class="badge text-white"> {{$data5['data_nt'][$i]}}  </span>  @endfor  @endif  </dd>
+      <dt class="col-sm-3"> SA </dt>
+      <dd class="col-sm-9"> @if (empty($data6['label_sa'])) <span class="text-warning"> None </span> @elseif (!empty($data6['label_sa']))  @for($i=0;$i<count($data6['label_sa']);$i++)  {{$data6['label_sa'][$i]}}:  <span class="badge text-white"> {{$data6['data_sa'][$i]}}  </span> @endfor  @endif  </dd>
+      <dt class="col-sm-3"> TAS </dt>
+      <dd class="col-sm-9"> @if (empty($data7['label_tas'])) <span class="text-warning"> None </span> @elseif (!empty($data7['label_tas'])) @for($i=0;$i<count($data7['label_tas']);$i++)  {{$data7['label_tas'][$i]}}:  <span class="badge text-white"> {{$data7['data_tas'][$i]}}  </span>  @endfor  @endif  </dd>
+      <dt class="col-sm-3"> VIC </dt>
+      <dd class="col-sm-9"> @if (empty($data8['label_vic'])) <span class="text-warning"> None </span> @elseif (!empty($data8['label_vic']))  @for($i=0;$i<count($data8['label_vic']);$i++)  {{$data8['label_vic'][$i]}}:  <span class="badge text-white"> {{$data8['data_vic'][$i]}}  </span>  @endfor  @endif  </dd>
+      <dt class="col-sm-3"> WA </dt>
+      <dd class="col-sm-9"> @if (empty($data9['label_wa'])) <span class="text-warning"> None </span> @elseif (!empty($data9['label_wa']))  @for($i=0;$i<count($data9['label_wa']);$i++)  {{$data9['label_wa'][$i]}}:  <span class="badge text-white"> {{$data9['data_wa'][$i]}}  </span>  @endfor  @endif  </dd>
+    
       </dl>
 
     </div>
