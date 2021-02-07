@@ -33,26 +33,9 @@
       <dd class="col-sm-9">  @for($i=0;$i<count($data2['label_act']);$i++)  {{$data2['label_act'][$i]}}:  <span class="badge text-white"> {{$data2['data_act'][$i]}} </span>  @endfor</dd>
       <dt class="col-sm-3"> NSW </dt>
       <dd class="col-sm-9">  @for($i=0;$i<count($data3['label_nsw']);$i++)  {{$data3['label_nsw'][$i]}}:  <span class="badge text-white"> {{$data3['data_nsw'][$i]}}  </span>  @endfor</dd>
-      <dt class="col-sm-3"> QLD </dt>
-      <dd class="col-sm-9">  @for($i=0;$i<count($data4['label_qld']);$i++)  {{$data4['label_qld'][$i]}}:  <span class="badge text-white"> {{$data4['data_qld'][$i]}}  </span>  @endfor</dd>
-      <dt class="col-sm-3"> NT </dt>
-      <dd class="col-sm-9">  @for($i=0;$i<count($data5['label_nt']);$i++)  {{$data5['label_nt'][$i]}}:  <span class="badge text-white"> {{$data5['data_nt'][$i]}}  </span>  @endfor</dd>
-      <dt class="col-sm-3"> SA </dt>
-      <dd class="col-sm-9">  @for($i=0;$i<count($data6['label_sa']);$i++)  {{$data6['label_sa'][$i]}}:  <span class="badge text-white"> {{$data6['data_sa'][$i]}}  </span>  @endfor</dd>
-      <dt class="col-sm-3"> TAS </dt>
-      <dd class="col-sm-9">  @for($i=0;$i<count($data7['label_tas']);$i++)  {{$data7['label_tas'][$i]}}:  <span class="badge text-white"> {{$data7['data_tas'][$i]}}  </span>  @endfor</dd>
-      <dt class="col-sm-3"> VIC </dt>
-      <dd class="col-sm-9">  @for($i=0;$i<count($data8['label_vic']);$i++)  {{$data8['label_vic'][$i]}}:  <span class="badge text-white"> {{$data8['data_vic'][$i]}}  </span>  @endfor</dd>
-      <dt class="col-sm-3"> WA </dt>
-      <dd class="col-sm-9">  @for($i=0;$i<count($data9['label_wa']);$i++)  {{$data9['label_wa'][$i]}}:  <span class="badge text-white"> {{$data9['data_wa'][$i]}}  </span>  @endfor</dd>
-      Test  
+
       </dl>
 
-  
-      
-   
-     
-  
     </div>
   </div>
 
