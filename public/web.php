@@ -1,27 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-//Route::get('/', function () {
- //   return view('welcome');
-//});
-//Route::get('/', 'AdminController@index')->name('admin')->middleware('admin');
+use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminCreateUsersController;
+use App\Http\Controllers\ShowContractorsController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\DocumentsForReviewController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\WorkAreaController;
+use App\Http\Controllers\TechnicianController;
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\Technician;
+use App\Http\Middleware\Vendor;
 
 
 Route::middleware(['admin'])->group( function() {
 
+	Route::get('/dashboard', 'ChartsController@index')->name('admin.dashboard'); 
+    Route::get('/dashboard', 'ChartsController@index2'); 	
 	Route::get('/', 'AdminController@index'); //routes to homepage default
 	Route::post('/admin/changepassword', 'ResetPasswordController@resetPassword')->name('changePassword');
 	Route::get('/admin', 'AdminController@index')->name('admin.index');			//routes to homepage default
@@ -33,7 +30,7 @@ Route::middleware(['admin'])->group( function() {
 
 	Route::get('/showcontractors', 'ShowContractorsController@index')->name('admin.showcontractors');	// admin default index that shows contractors list
 	Route::get('/addcontractors', 'ShowContractorsController@create')->name('admin.addcontractors'); //To create user button
-	Route::post('/addcontractors', 'ShowContractorsController@store')->name('admin.storecontractors'); //To store contractors in DB | admin default index page
+	Route::post('/addcontractors/', 'ShowContractorsController@store')->name('admin.storecontractors'); //To store contractors in DB | admin default index page
 
 	Route::get('FormsandDocuments', 'DocumentController@formsanddocuments')->name('admin.forms');
 	Route::put('FormsandDocuments/Update', 'DocumentController@updatedocument')->name('admin.updatedocument');
@@ -63,8 +60,11 @@ Route::middleware(['vendor'])->group(function () {
 		//Route::get('get-city-list', 'CountryController@getCityList');
 
     Route::get('/MyTechnicians', 'VendorController@showtechnicians')->name('vendor.showtechnicians');  //Shows technicians page
-    Route::get('/MyTechnicians/Add', 'VendorController@createtechnicians')->name('vendor.addtechnicians'); //To add technicians button
-    Route::post('/MyTechnicians/Add', 'VendorController@storetechnicians')->name('vendor.storetechnicians'); //To store technicians in users table, and technician table
+    Route::get('/MyTechnicians/{id}', 'DocumentController@techniciandocs')->name('vendor.techniciandocs');  //Shows technicians page
+    Route::put('/MyTechnicians/{id}', 'DocumentController@individualuploads')->name('vendor.individualuploads'); 
+
+    Route::get('/Add/MyTechnicians', 'VendorController@addtechnicians')->name('vendor.addtechnicians'); //To add technicians button
+    Route::post('/Add/MyTechnicians', 'VendorController@storetechnicians')->name('vendor.storetechnicians'); //To store technicians in users table, and technician table
 
     Route::get('/MySkillSet', 'VendorController@viewskillset')->name('vendor.viewskillset'); //button to view skillset details
     Route::put('/MySkillSet', 'VendorController@updateskillset')->name('vendor.updateskillset'); //function to update skillset
@@ -85,8 +85,11 @@ Route::middleware(['vendor'])->group(function () {
 
 Route::middleware(['technician'])->group(function () {
 	Route::get('/technician', 'TechnicianController@index')->name('technician.index');
+	Route::put('/technician', 'TechnicianController@update')->name('technician.update');	
+	Route::put('/technician/upload', 'TechnicianController@upload')->name('technician.upload');		
 	Route::post('/technician/changepassword', 'ResetPasswordController@resetPasswordtechnician')->name('changePasswordtechnician');
 });
 //Route::get('/home', 'HomeController@index')->name('home');
+
 
 Auth::routes(['register' => false]);

@@ -34,7 +34,7 @@ class LoginController extends Controller
     public function redirectTo() {
         switch (Auth::user()->role) {            //if user is logged in, 
             case 1:
-                $this->redirectTo = '/admin';
+                $this->redirectTo = '/dashboard';
                 return $this->redirectTo;
                 break;
             case 2:

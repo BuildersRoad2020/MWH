@@ -23,7 +23,7 @@ class Vendor
         // role 2 = vendor
         // role 3 = technician
         if(Auth::user()->role == 1){
-            return redirect()->route('admin.index');
+            return redirect()->route('admin.dashboard');
         }
         if(Auth::user()->role == 2){
             return $next($request);

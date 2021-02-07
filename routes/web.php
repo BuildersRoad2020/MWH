@@ -17,7 +17,8 @@ use App\Http\Middleware\Vendor;
 
 Route::middleware(['admin'])->group( function() {
 
-
+	Route::get('/dashboard', 'ChartsController@index')->name('admin.dashboard'); 
+    //Route::get('/dashboard', 'ChartsController@index2'); 	
 	Route::get('/', 'AdminController@index'); //routes to homepage default
 	Route::post('/admin/changepassword', 'ResetPasswordController@resetPassword')->name('changePassword');
 	Route::get('/admin', 'AdminController@index')->name('admin.index');			//routes to homepage default
