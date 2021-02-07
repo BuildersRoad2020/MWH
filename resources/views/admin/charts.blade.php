@@ -130,7 +130,7 @@
         display: true,
         position: "top",
         text: "Contractor Status",
-        fontSize: 8,
+        fontSize: 10,
         fontColor: "#111"
       },
       legend: {
@@ -194,7 +194,7 @@
         display: true,
         position: "top",
         text: "Australian Capital Territory Contractors",
-        fontSize: 8,
+        fontSize: 10,
         fontColor: "#111"
       },
       legend: {
@@ -208,6 +208,7 @@
       scales: {
         yAxes: [{
           ticks: {
+            precision: 0,
             beginAtZero: true
           }
         }]
@@ -265,7 +266,7 @@
         display: true,
         position: "top",
         text: "New South Wales Contractors",
-        fontSize: 8,
+        fontSize: 10,
         fontColor: "#111"
       },
       legend: {
@@ -279,6 +280,7 @@
       scales: {
         yAxes: [{
           ticks: {
+            precision: 0,
             beginAtZero: true
           }
         }]
@@ -335,8 +337,8 @@
       title: {
         display: true,
         position: "top",
-        text: "Quensland Contractors",
-        fontSize: 8,
+        text: "Queensland Contractors",
+        fontSize: 10,
         fontColor: "#111"
       },
       legend: {
@@ -350,6 +352,7 @@
       scales: {
         yAxes: [{
           ticks: {
+            precision: 0,            
             beginAtZero: true
           }
         }]
@@ -407,7 +410,7 @@
         display: true,
         position: "top",
         text: "Northern Territory Contractors",
-        fontSize: 8,
+        fontSize: 10,
         fontColor: "#111"
       },
       legend: {
@@ -421,6 +424,7 @@
       scales: {
         yAxes: [{
           ticks: {
+            precision: 0,            
             beginAtZero: true
           }
         }]
@@ -478,7 +482,7 @@
         display: true,
         position: "top",
         text: "Southern Australia Contractors",
-        fontSize: 8,
+        fontSize: 10,
         fontColor: "#111"
       },
       legend: {
@@ -492,6 +496,7 @@
       scales: {
         yAxes: [{
           ticks: {
+            precision: 0,            
             beginAtZero: true
           }
         }]
@@ -549,7 +554,7 @@
         display: true,
         position: "top",
         text: "Tasmania Contractors",
-        fontSize: 8,
+        fontSize: 10,
         fontColor: "#111"
       },
       legend: {
@@ -563,6 +568,7 @@
       scales: {
         yAxes: [{
           ticks: {
+            precision: 0,            
             beginAtZero: true
           }
         }]
@@ -620,7 +626,7 @@
         display: true,
         position: "top",
         text: "Victoria Contractors",
-        fontSize: 8,
+        fontSize: 10,
         fontColor: "#111"
       },
       legend: {
@@ -634,6 +640,7 @@
       scales: {
         yAxes: [{
           ticks: {
+            precision: 0,            
             beginAtZero: true
           }
         }]
@@ -691,7 +698,7 @@
         display: true,
         position: "top",
         text: "Western Australia Contractors",
-        fontSize: 8,
+        fontSize: 10,
         fontColor: "#111"
       },
       legend: {
@@ -705,6 +712,7 @@
       scales: {
         yAxes: [{
           ticks: {
+            precision: 0,            
             beginAtZero: true
           }
         }]
