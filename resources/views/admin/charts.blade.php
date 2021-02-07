@@ -45,8 +45,7 @@
       <dd class="col-sm-9">  @for($i=0;$i<count($data8['label_vic']);$i++)  {{$data8['label_vic'][$i]}}:  <span class="badge text-white"> {{$data8['data_vic'][$i]}}  </span>  @endfor</dd>
       <dt class="col-sm-3"> WA </dt>
       <dd class="col-sm-9">  @for($i=0;$i<count($data9['label_wa']);$i++)  {{$data9['label_wa'][$i]}}:  <span class="badge text-white"> {{$data9['data_wa'][$i]}}  </span>  @endfor</dd>
-  
-   
+      Test  
       </dl>
 
   
