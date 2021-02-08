@@ -12,15 +12,15 @@ use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
+|--------------------------------------------------------------------------
+| Login Controller
+|--------------------------------------------------------------------------
+|
+| This controller handles authenticating users for the application and
+| redirecting them to your home screen. The controller uses a trait
+| to conveniently provide its functionality to your applications.
+|
+*/
 
     use AuthenticatesUsers;
 
@@ -31,14 +31,15 @@ class LoginController extends Controller
      */
     //protected $redirectTo = RouteServiceProvider::HOME;
 
-    public function redirectTo() {
+    public function redirectTo()
+    {
         switch (Auth::user()->role) {            //if user is logged in, 
             case 1:
                 $this->redirectTo = '/dashboard';
                 return $this->redirectTo;
                 break;
             case 2:
-                $this->redirectTo = '/vendor';
+                $this->redirectTo = '/vendordashboard';
                 return $this->redirectTo;
                 break;
             case 3:
@@ -49,7 +50,7 @@ class LoginController extends Controller
                 $this->redirectTo = '/login';
                 return $this->redirectTo;
                 break;
-        }                 
+        }
     }
 
     /**

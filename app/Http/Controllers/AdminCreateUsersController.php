@@ -20,11 +20,11 @@ class AdminCreateUsersController extends Controller
 
   public function createusers()
   {
-
     return view('admin.create');
   }
 
-  public function storeusers(Request $request){
+  public function storeusers(Request $request)
+  {
 
     $request->validate([
       'name' => ['required', 'string', 'max:255', 'min:8'],
@@ -45,24 +45,20 @@ class AdminCreateUsersController extends Controller
     $email = $request['email'];
     $details = [
 
-      'name'=> 'Dear '.$UCwordsname.'',
+      'name' => 'Dear ' . $UCwordsname . '',
       'body' =>  'Your access to Builders group has been created!',
-      'user' => 'Your username is : '.$email,
-      'password' => 'Your password is : '.$pass,
+      'user' => 'Your username is : ' . $email,
+      'password' => 'Your password is : ' . $pass,
 
     ];
     \Mail::to($email)->send(new SendMail($details));
 
     if ($request['role'] == 1) {
-      return redirect()->route('admin.index')->with('status','User created successfully!');
-    }
-    else if ($request['role'] == 2)
-    { 
+      return redirect()->route('admin.index')->with('status', 'User created successfully!');
+    } else if ($request['role'] == 2) {
       return redirect()->route('admin.addcontractors')
 
-      ->with('status','User created successfully! Please assign User to Contractor');
+        ->with('status', 'User created successfully! Please assign User to Contractor');
     }
-
   }
-
 }

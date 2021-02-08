@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Console\Commands;
+
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use App\Document;
@@ -43,37 +44,32 @@ class ExpiredNotifEmail extends Command
      */
     public function handle()
     {
-        $today = Carbon::now();// current date
+        $today = Carbon::now(); // current date
         $users = Document::whereDate('Expiration', '<', $today)->get(); // get all data 
         foreach ($users as $user) {
             $contractors = Contractor::where('user_id', $user->contractor_id)->first();
-            $Expiration = $user->Expiration;  
-            $Document = $user->FormID;                  
+            $Expiration = $user->Expiration;
+            $Document = $user->FormID;
             $name = $contractors->contractor_name;
-            $Form = Forms::where('id',$Document)->first();
-            $doc=$Form->Doc_Desc;
+            $Form = Forms::where('id', $Document)->first();
+            $doc = $Form->Doc_Desc;
 
-            $datetocompare = Carbon::parse($Expiration)->addDays(1);              
+            $datetocompare = Carbon::parse($Expiration)->addDays(1);
 
-        if($today = $datetocompare)
-        {
-             
-            $email =  $contractors->email_primary;
-            $contractor_id = $contractors->user_id;
-            Document::where('FormID', $user->FormID)->where(['contractor_id' => $contractor_id,])->update(['Status' => 5]);
-            Contractor::where(['user_id' => $contractor_id])->update(['Status' => 0]);
+            if ($today = $datetocompare) {
 
-        $details2 = [   
-            'name'=> 'Dear '.$name,
-            'body' =>  'Your '.$doc.' document has already expired last '.$Expiration,
-            'body2' => 'Please Renew this document.' ,
-        ];
-        \Mail::to($email)->send(new documentexpiry($details2));
-        }
+                $email =  $contractors->email_primary;
+                $contractor_id = $contractors->user_id;
+                Document::where('FormID', $user->FormID)->where(['contractor_id' => $contractor_id,])->update(['Status' => 5]);
+                Contractor::where(['user_id' => $contractor_id])->update(['Status' => 0]);
 
-
-        
+                $details2 = [
+                    'name' => 'Dear ' . $name,
+                    'body' =>  'Your ' . $doc . ' document has already expired last ' . $Expiration,
+                    'body2' => 'Please Renew this document.',
+                ];
+                \Mail::to($email)->send(new documentexpiry($details2));
+            }
         }
     }
-
 }

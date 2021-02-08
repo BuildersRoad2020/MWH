@@ -49,6 +49,7 @@ Route::middleware(['admin'])->group( function() {
 
 Route::middleware(['vendor'])->group(function () {
 
+	Route::get('/vendordashboard', 'ChartsController@vendor')->name('vendor.dashboard'); 
 	Route::get('/vendor', 'VendorController@index')->name('vendor.index');
 	Route::post('/vendor/changepassword', 'ResetPasswordController@resetPasswordvendor')->name('changePasswordvendor');
 

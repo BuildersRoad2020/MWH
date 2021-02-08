@@ -161,9 +161,6 @@ class ShowContractorsController extends Controller
 
   public function store(Request $request)
   {
-
-
-
     $request->validate([
       'contractor_name' => ['required', 'string', 'max:255'],
       'user_id' => 'required',
@@ -180,7 +177,6 @@ class ShowContractorsController extends Controller
     SkillSet::create([                            //creates entry for Skill_sets table
       'contractor_id' => $request['user_id'],
     ]);
-
 
     User::where([                                   // para ma update ang status table pag select sa vendor
       'id' => $request['user_id'],

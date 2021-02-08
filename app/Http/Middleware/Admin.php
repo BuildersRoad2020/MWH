@@ -26,7 +26,7 @@ class Admin
             return $next($request);
         }
         if(Auth::user()->role == 2){
-            return redirect()->route('vendor.index');
+            return redirect()->route('vendor.dashboard');
         }
         if(Auth::user()->role == 3){
             return redirect()->route('technician.index');

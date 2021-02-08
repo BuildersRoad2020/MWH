@@ -55,9 +55,9 @@ Tip 1: you can change the color of the sidebar using: data-color="blue | azure |
     </div>
 
     <ul class="nav">
-        <li class="{{ request()->routeIs('admin.dashboard')? 'active' : '' }}">
-            <a href="{{ route('admin.dashboard')}}">
-                <i class="pe-7s-cash">   </i> 
+        <li class="{{ request()->routeIs('admin.index')? 'active' : '' }}">
+            <a href="{{ route('admin.index')}}">
+                <i class="pe-7s-info">   </i> 
                 <p>Dashboard </p>
             </a>
         </li>  

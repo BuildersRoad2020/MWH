@@ -12,22 +12,21 @@ class CountryController extends Controller
 
     public function getStateList()
     {
-        $states = State::whereHas('countries', function($query) {
+        $states = State::whereHas('countries', function ($query) {
             $query->whereId(request()->input('country_id', 0));
         })
-        ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return response()->json($states);
     }
 
     public function getCityList()
     {
-        $cities = City::whereHas('states', function($query) {
+        $cities = City::whereHas('states', function ($query) {
             $query->whereId(request()->input('state_id', 0));
         })
-        ->pluck('name', 'id');
+            ->pluck('name', 'id');
 
         return response()->json($cities);
     }
 }
-

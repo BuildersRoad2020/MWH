@@ -26,7 +26,7 @@ class Technician
             return redirect()->route('admin.dashboard');
         }
         if(Auth::user()->role == '2'){
-            return redirect()->route('vendor.index');
+            return redirect()->route('vendor.dashboard');
         }
         if(Auth::user()->role == '3'){
             return $next($request);

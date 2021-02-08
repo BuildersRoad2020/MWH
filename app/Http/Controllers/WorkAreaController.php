@@ -1,8 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request; use Carbon\Carbon;
-use App\Contractor; use App\Document; use App\Country; use App\User; use App\Forms; use App\WorkArea; use App\Rates;
+
+use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Contractor;
+use App\Document;
+use App\Country;
+use App\User;
+use App\Forms;
+use App\WorkArea;
+use App\Rates;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -15,92 +23,97 @@ class WorkAreaController extends Controller
 {
 
 
-  public function rates(Request $request)  {  
+  public function rates(Request $request)
+  {
 
     $Original = DB::table('documents')
-    ->join('forms', 'forms.ID', '=', 'documents.FormID')
-    ->where('documents.contractor_id', auth()->user()->id)       
-    ->join('countries', 'countries.ID', '=', 'forms.country')     
-    ->where('forms.Type','=','Work Area')
-    ->leftjoin('work_areas','work_areas.FormID', '=' , 'documents.FormID')->OrderBy('forms.Doc_Desc','ASC')
-    ->leftjoin('rates', 'rates.FormId', '=', 'documents.FormID')->distinct('rates.Class')
-    ->get(['forms.Doc_Desc', 'work_areas.Type','documents.FormID', 'countries.country','documents.Status', 'work_areas.ID', 'rates.Rate', 'rates.Rate2', 'rates.Class' ])->groupBy('Doc_Desc')->map(function ($Rate, $key) { return $Rate;});
+      ->join('forms', 'forms.ID', '=', 'documents.FormID')
+      ->where('documents.contractor_id', auth()->user()->id)
+      ->join('countries', 'countries.ID', '=', 'forms.country')
+      ->where('forms.Type', '=', 'Work Area')
+      ->leftjoin('work_areas', 'work_areas.FormID', '=', 'documents.FormID')->OrderBy('forms.Doc_Desc', 'ASC')
+      ->leftjoin('rates', 'rates.FormId', '=', 'documents.FormID')->distinct('rates.Class')
+      ->get(['forms.Doc_Desc', 'work_areas.Type', 'documents.FormID', 'countries.country', 'documents.Status', 'work_areas.ID', 'rates.Rate', 'rates.Rate2', 'rates.Class'])->groupBy('Doc_Desc')->map(function ($Rate, $key) {
+        return $Rate;
+      });
 
 
 
     $count = count($Original);
     $Rates = DB::table('rates')
-    ->join('forms', 'forms.id' ,'=', 'rates.FormID')->where('rates.contractor_id', auth()->user()->id )->OrderBy('forms.Doc_Desc','ASC')
-    ->join('documents', 'documents.FormID', '=', 'rates.formID')
-    ->join('countries', 'countries.ID', '=', 'forms.country')->distinct('rates.Class')    		
-    ->get(['rates.Class', 'rates.Rate', 'rates.Rate2','forms.Doc_Desc', 'documents.status', 'countries.country'])->groupBy('Doc_Desc')->map(function ($Rate, $key) { return $Rate;});
+      ->join('forms', 'forms.id', '=', 'rates.FormID')->where('rates.contractor_id', auth()->user()->id)->OrderBy('forms.Doc_Desc', 'ASC')
+      ->join('documents', 'documents.FormID', '=', 'rates.formID')
+      ->join('countries', 'countries.ID', '=', 'forms.country')->distinct('rates.Class')
+      ->get(['rates.Class', 'rates.Rate', 'rates.Rate2', 'forms.Doc_Desc', 'documents.status', 'countries.country'])->groupBy('Doc_Desc')->map(function ($Rate, $key) {
+        return $Rate;
+      });
 
-    $otherscount = DB::table('rates')->where('contractor_id', auth()->user()->id)->where('Class','<>', 'Metro')->where('Class','<>', 'Regional')
-    ->where('Class','<>', 'Regional')->count(); 
+    $otherscount = DB::table('rates')->where('contractor_id', auth()->user()->id)->where('Class', '<>', 'Metro')->where('Class', '<>', 'Regional')
+      ->where('Class', '<>', 'Regional')->count();
 
-    return view('vendor.workarea',
-      ['Original'=> $Original, 'Rates' => $Rates, 'count' => $count, 'otherscount' => $otherscount,
-    ]);
-
+    return view(
+      'vendor.workarea',
+      [
+        'Original' => $Original, 'Rates' => $Rates, 'count' => $count, 'otherscount' => $otherscount,
+      ]
+    );
   }
 
-  public function addrates(Request $request) {
+  public function addrates(Request $request)
+  {
 
     $Type = $request['Type'];
-    $FormID = $request['FormID']; 
-    $Rate = $request['Rate'];  
-    $Rate2 = $request['Rate2'];      
-    $Class = $request['Class'];  
+    $FormID = $request['FormID'];
+    $Rate = $request['Rate'];
+    $Rate2 = $request['Rate2'];
+    $Class = $request['Class'];
 
     $countype = count((array)$Type);
 
-    if ($countype < 1 ) {
-     return back()->withInput()->with('status','No rate uploaded');
+    if ($countype < 1) {
+      return back()->withInput()->with('status', 'No rate uploaded');
     }
 
-    foreach($Type as $key=>$Type) {
+    foreach ($Type as $key => $Type) {
 
       $upload = WorkArea::updateorCreate(
-        ['contractor_id' => auth()->user()->id,   'FormID' => $FormID[$key], 'Type' => $Type  ],
-        [ ],  ); 
+        ['contractor_id' => auth()->user()->id,   'FormID' => $FormID[$key], 'Type' => $Type],
+        [],
+      );
     }
 
-    foreach($Class as $key=>$Class) {
+    foreach ($Class as $key => $Class) {
       $test = Rates::updateorcreate(
-        ['contractor_id' => auth()->user()->id, 'FormID' => $FormID[$key], 'Class' => $Class ],
-        ['Rate' => $Rate[$key], 'Rate2' => $Rate2[$key] ],  );  
-    } 
+        ['contractor_id' => auth()->user()->id, 'FormID' => $FormID[$key], 'Class' => $Class],
+        ['Rate' => $Rate[$key], 'Rate2' => $Rate2[$key]],
+      );
+    }
 
 
     $Others = $request['Others'];
     $arrayClass = explode(', ', $request['Others']);
 
     if ($Others != null) {
-      foreach($arrayClass as $Class) {
+      foreach ($arrayClass as $Class) {
         $Additional = Rates::updateorcreate(
-          ['contractor_id'=> auth()->user()->id, 'FormID' => $request['newFormID'], 'Class' =>$Class ],
-          [], ); } }
+          ['contractor_id' => auth()->user()->id, 'FormID' => $request['newFormID'], 'Class' => $Class],
+          [],
+        );
+      }
+    }
 
-        return back()->withInput()->with('status','Document updated successfully!');
-
-      } 
-
-
-public function deleterates(Request $request) { //Delete function vendor rates
-  $ID = $request['deleteformID'];    
-
-  $Delete = WorkArea::where('contractor_id', auth()->user()->id)->where('FormID', $ID)->delete();  
-  $Remove = Rates::where('contractor_id', auth()->user()->id)->where('FormID', $ID)->delete();
+    return back()->withInput()->with('status', 'Document updated successfully!');
+  }
 
 
-  return back()->withInput()->with('status','Rates Removed');
+  public function deleterates(Request $request)
+  { //Delete function vendor rates
+    $ID = $request['deleteformID'];
+
+    $Delete = WorkArea::where('contractor_id', auth()->user()->id)->where('FormID', $ID)->delete();
+    $Remove = Rates::where('contractor_id', auth()->user()->id)->where('FormID', $ID)->delete();
+
+
+    return back()->withInput()->with('status', 'Rates Removed');
+  }
 }
-}
-
-
-
-
-
-
-
-

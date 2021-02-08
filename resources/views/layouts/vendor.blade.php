@@ -55,6 +55,13 @@ sidebar : data-color="blue | azure | green | orange | red | purple"
     </div>
 
     <ul class="nav">
+    <li class="{{ request()->routeIs('vendor.dashboard')? 'active' : '' }}">
+            <a href="{{ route('vendor.dashboard')}}">
+                <i class="pe-7s-info">   </i> 
+                <p>Dashboard </p>
+            </a>
+        </li>  
+
         <li class="{{ request()->routeIs('vendor.index')? 'active' : '' }}">
             <a href="{{ route('vendor.index')}}">
                 <i class="pe-7s-portfolio"></i>
