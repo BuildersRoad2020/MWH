@@ -108,15 +108,31 @@ class ChartsController extends Controller
   }
   public function vendor()
   {
-    //mandatory document chart
+    //doughnut chart
+
     $mandatory = Forms::where('mandatory', '=', '1')->select('ID')->get();
     $data = [];
+
+    //mandatory document chart
     foreach ($mandatory as $id) {
       $data['uploaded_count'][] = Document::where('contractor_id', auth()->user()->id)->where('FormID', $id->ID)->pluck('FormID')->first();
     }
+
     foreach ($data['uploaded_count'] as $index => $value) { //to remove null values reported above
       if ($value === null) unset($data['uploaded_count'][$index]);
     }
+
+    //get document that is missing
+    $missing = Forms::where('mandatory', '=', '1')->pluck('ID')->toarray();
+    foreach ($missing as $id => $key) {
+      $missing_id[] = Document::where('contractor_id', auth()->user()->id)->where('FormID', $key)->pluck('FormID')->first();
+    }
+    $locate_missing = array_diff($missing, $missing_id);
+
+    foreach ($locate_missing as $id => $key) {
+      $data['missing'][] = Forms::where('id', $key)->pluck('Doc_Desc')->first();
+    }
+
     $data['total_count'][] = Forms::where('mandatory', '=', '1')->count();
     $data['label'][0] = 'Uploaded';
     $data['label'][1] = 'Pending';
@@ -124,14 +140,37 @@ class ChartsController extends Controller
     $data['data'][1] = Forms::where('mandatory', '=', '1')->count() - $data['data'][0];
     $encoded['label'] = $data['label'];
     $encoded['data'] = $data['data'];
-    $data['compliance'] = round(($data['data'][0] / Forms::where('mandatory', '=', '1')->count() * 100),2) . '%';
-
+    $data['compliance'] = round(($data['data'][0] / Forms::where('mandatory', '=', '1')->count() * 100), 2) . '%';
     $data['chart_data'] = json_encode($encoded);
-    $test = $data['data'][0] / Forms::where('mandatory', '=', '1')->count();
 
-    //dd($data);
+    //piechart
+    $documents = Document::wherein('status', ['1', '2', '3', '4', '5'])->where('contractor_id', auth()->user()->id)->select('status', \DB::raw("Count(*) as count"))->groupBy('status')->get();
+    $PieChart = [];
+    foreach ($documents as $document) {
+      switch ($document->status) {
+        case 1:
+          $PieChart['label'][] = 'Pending';
+          break;
+        case 2:
+          $PieChart['label'][] = 'Approved';
+          break;
+        case 3:
+          $PieChart['label'][] = 'Rejected';
+          break;
+        case 4:
+          $PieChart['label'][] = 'Expiring';
+          break;
+        case 5:
+          $PieChart['label'][] = 'Expired';
+          break;
+      }
+      $PieChart['data'][] = (int) $document->count;
+    }
+    $PieChart['chart_data'] = json_encode($PieChart);
+
     return view('vendor.charts', [
       'data' => $data,
+      'PieChart' => $PieChart,
     ]);
   }
 }

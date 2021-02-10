@@ -20,9 +20,12 @@
       </div>
       <dl class="row">
         @for($i=0;$i<count($data['label']);$i++) <dt class="col-sm-3">{{$data['label'][$i]}} </dt>
-          <dd class="col-sm-9"> <span class="badge text-white"> {{$data['data'][$i]}} </span></dd>
+          <dd class="col-sm-9"> <span class="badge text-white">  <small> {{$data['data'][$i]}}  </small> </span>  </dd>
           @endfor
-          <dt class="col-sm-3"> Compliance </dt> <dd class="col-sm-9"> {{$data['compliance']}} </dd>
+          <dt class="col-sm-3"> Compliance </dt>
+          <dd class="col-sm-9"> <small> {{$data['compliance']}} </small> </dd>
+          <dt class="col-sm-3"> Missing </dt> <br />  <dd class="col-sm-9"> @if (empty($data['missing'])) <small> <i class="fa fa-circle text-info"> </i> None </small> @elseif (!empty($data['missing'])) @for($i=0;$i<count($data['missing']);$i++) <small> <i class="fa fa-circle text-danger"> </i>  {{$data['missing'][$i]}}  </small>  @endfor </dd> @endif
+
       </dl>
       <div class="row">
         <h5 class="text-info col-sm-9">Additional Details </h5>
@@ -37,6 +40,14 @@
     </div>
   </div>
 
+<div class="row">
+  <div class="pie-chart-container col-md-6">
+      <div class="chart-container">
+        <canvas id="doughnut-chart" height="280" width="600"></canvas>
+      </div>
+    </div>
+</div>
+
 </div>
 
 
@@ -50,7 +61,7 @@
 
 <script>
   $(function() {
-    //get the pie chart canvas
+    //get the doughnut chart canvas
     var cData = JSON.parse(`<?php echo $data['chart_data']; ?>`);
     var ctx = $("#pie-chart");
 
@@ -61,20 +72,18 @@
         label: "Mandatory Document Status",
         data: cData.data,
         backgroundColor: [
-          'rgba(54, 162, 235, 0.2)',            
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          "#003F5C",
+              "#58508D",
+              "#BC5090",
+              "#FF6361",
+              "#FFA600",
         ],
         borderColor: [
-          'rgba(54, 162, 235, 1)',            
-          'rgba(255, 99, 132, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          "#FFFFFF",
+              "#FFFFFF",
+              "#FFFFFF",
+              "#FFFFFF",
+              "#FFFFFF",
         ],
         borderWidth: [1, 1, 1, 1, 1, 1, 1]
       }]
@@ -86,7 +95,7 @@
       title: {
         display: true,
         position: "top",
-        text: "Mandatory Document Status",
+        text: "Required Documents",
         fontSize: 12,
         fontColor: "#111"
       },
@@ -112,6 +121,69 @@
   });
 </script>
 
+<script>
+  $(function() {
+    //get the pie chart canvas
+    var cData = JSON.parse(`<?php echo $PieChart['chart_data']; ?>`);
+    var ctx = $("#doughnut-chart");
+
+    //pie chart data
+    var data = {
+      labels: cData.label,
+      datasets: [{
+        label: "Document Status",
+        data: cData.data,
+        backgroundColor: [
+          "#003F5C",
+              "#58508D",
+              "#BC5090",
+              "#FF6361",
+              "#FFA600",
+
+        ],
+        borderColor: [
+          "#FFFFFF",
+              "#FFFFFF",
+              "#FFFFFF",
+              "#FFFFFF",
+              "#FFFFFF",
+ 
+        ],
+        borderWidth: [1, 1, 1, 1, 1, 1, 1]
+      }]
+    };
+
+    //options
+    var options = {
+      responsive: true,
+      title: {
+        display: true,
+        position: "top",
+        text: "My Documents Status",
+        fontSize: 12,
+        fontColor: "#111"
+      },
+      legend: {
+        display: true,
+        position: "bottom",
+        labels: {
+          fontColor: "#333",
+          fontSize: 10,
+        }
+      }
+    };
+
+    //create Pie Chart class object
+    var chart1 = new Chart(ctx, {
+      type: "pie",
+      data: data,
+      options: options
+    });
+
+
+
+  });
+</script>
 
 
 @endsection
